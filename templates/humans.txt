@@ -1,0 +1,11 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+	Håkon Ødegård Løvdal -- Developer -- @hakloev
+
+# THANKS
+	Thanks to all you people!
+
+# TECHNOLOGY COLOPHON
+	Django
