@@ -21,7 +21,8 @@ from .views import home_files
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
-    url(r'^(?P<file_name>(robots.txt)|(humans.txt))$', home_files, name="home-files"),
     url(r'^admin/', admin.site.urls),
+    url(r'^markdown/', include('django_markdown.urls')),
+    url(r'^(?P<file_name>(robots.txt)|(humans.txt))$', home_files, name="home-files"),
     url(r'^blog/', include('apps.blog.urls', namespace='blog'))
 ]

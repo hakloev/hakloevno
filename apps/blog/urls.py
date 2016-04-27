@@ -1,6 +1,8 @@
 from django.conf.urls import url
+from . import views, feed
 
 urlpatterns = [
-    url(r'^$', None, name='index'),
-    url(r'^archive/$', None, name='all_posts')
+    url(r'^$', views.BlogIndex.as_view(), name='index'),
+    url(r'^post/(?P<slug>\S+)/$', views.BlogPostDetail.as_view(), name='blog_post'),
+    url(r'^feed/$', feed.LatestPosts(), name='feed'),
 ]

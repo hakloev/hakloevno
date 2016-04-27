@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load django_markdown %}
+
+{% block content %}
+    {% for object in object_list %}
+        <div class="blog-post">
+            <h2><a href="{% url "blog:blog_post" slug=object.slug %}">{{ object.title }}</a></h2>            <p class="blog-post-meta">{{ object.created }}</p>
+            {{ object.body | markdown }}
+        </div>
+    {% endfor %}
+{% endblock %}
