@@ -2,9 +2,18 @@
 {% load django_markdown %}
 
 {% block content %}
-    <div class="blog-post">
-        <h2><a href="{% url 'blog:blog_post' slug=object.slug %}">{{ object.title }}</a></h2>
-        <p class="blog-post-meta">{{ object.created }} | Tagged under {{ object.tags.all | join:', ' }}</p>
-        {{ object.body | markdown }}
-    </div>
+    <section class="hn-section--padding-50">
+        <div class="mdl-grid hn-section--max-width-85">
+            <div class="mdl-cell mdl-cell--12-col">
+                <h1>{{ object.title }}</h1>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col">
+                <p>{{ object.ingress }}</p>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col">
+                {{ object.body | markdown }}
+            </div>
+        </div>
+    </section>
+
 {% endblock %}

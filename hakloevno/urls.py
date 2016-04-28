@@ -17,10 +17,10 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic.base import TemplateView
 
-from .views import home_files
+from .views import home_files, index
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
+    url(r'^$', index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^markdown/', include('django_markdown.urls')),
     url(r'^(?P<file_name>(robots.txt)|(humans.txt))$', home_files, name="home-files"),

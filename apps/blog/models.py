@@ -16,6 +16,7 @@ class BlogEntryQuerySet(models.QuerySet):
 
 class BlogEntry(models.Model):
     title = models.CharField(max_length=200)
+    ingress = models.CharField(max_length=500)
     body = models.TextField()
     slug = models.SlugField(max_length=200, unique=True)
     tags = models.ManyToManyField(Tag)

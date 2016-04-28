@@ -3,6 +3,54 @@
 {% block title %}hakloev.no{% endblock %}
 
 {% block content %}
-    <h1>Hello</h1
+    <section class="mdl-grid hn-section--max-width-85 hn-section--padding-50" id="hn-about-me">
+        <div class="mdl-cell mdl-cell--8-col mdl-cell--middle hn-text--centered">
+            <p>I' am hakloev, the God of the webs</p>
+        </div>
+        <div class="mdl-cell mdl-cell--4-col mdl-cell--middle">
+            <div class="about-me__card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Håkon Løvdal</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    I'm a computer science student at NTNU, but mainly I act out as totally boss and a structurized procastinator. Feel free to look around. To begin with you can look below, there you will find a list of my most recent blog posts.
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="hn-section--padding-50" id="hn-blog-posts">
+        <div class="mdl-grid hn-section--max-width-85">
+            <div class="mdl-cell mdl-cell--12-col hn-title">
+                <h3 class="hn-title__text hn-text-color--orange">latest blog posts:</h3>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col">
+                <div class="mdl-grid mdl-grid--no-spacing">
+                    <div class="mdl-cell mdl-cell--8-col">
+                        <div class="mdl-grid mdl-grid--no-spacing">
+                        {% for entry in blog_entries %}
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <div class="mdl-card mdl-shadow--2dp hn-blog-post">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text"><a href="{% url 'blog:blog_post' slug=entry.slug %}">{{ entry.title }}</a></h2>
+                                    </div>
+                                    <div class="mdl-card__supporting-text">
+                                        Written {{ entry.created }}
+                                    </div>
+                                    <div class="mdl-card__supporting-text">
+                                        {{ entry.ingress }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <!-- Here be dragons -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 {% endblock %}
 

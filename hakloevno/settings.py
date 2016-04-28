@@ -44,6 +44,7 @@ def validate(keyset):
 # Declare what environment we are operating in
 PRODUCTION = bool(os.getenv('OF_PRODUCTION', False))
 STAGING = bool(os.getenv('OF_STAGING', False))
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not PRODUCTION
 
 # Define which attributes must be set if we are in staging
@@ -64,11 +65,13 @@ PRODUCTION_CRITICALS.update({
 })
 
 # Fetch values from environment, if provided
-DB_NAME = os.getenv('OF_DB_NAME', '')
-DB_USER = os.getenv('OF_DB_USER', '')
-DB_PASSWORD = os.getenv('OF_DB_PASSWORD', '')
-DB_HOST = os.getenv('OF_DB_HOST', '')
-DB_PORT = os.getenv('OF_DB_PORT', '')
+DB_NAME = os.getenv('HAKLOEVNO_DB_NAME', '')
+DB_USER = os.getenv('HAKLOEVNO_DB_USER', '')
+DB_PASSWORD = os.getenv('HAKLOEVNO_DB_PASSWORD', '')
+DB_HOST = os.getenv('HAKLOEVNO_DB_HOST', '')
+DB_PORT = os.getenv('HAKLOEVNO_DB_PORT', '')
+SECRET_KEY = os.getenv('HAKLOEVNO_SECRET_KEY', '')
+
 
 if PRODUCTION or STAGING:
     if PRODUCTION:
@@ -90,13 +93,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%*-g@o5c&ldoc&ue#4l239tnnpzrod6)b2*^c!f6a%z(@2l*2='
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'hakloev.no']
 
 DEFAULT_FROM_EMAIL = 'epona@hakloev.no'
 

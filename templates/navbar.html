@@ -1,0 +1,14 @@
+<header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title"><a href="/">hakloev.no</a></span>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link {% if '/blog/' in request.path %}mdl-navigation__link--current{% endif %}" href="{% url 'blog:index' %}">blog</a>
+        </nav>
+    </div>
+</header>
+<div class="mdl-layout__drawer">
+    <span class="mdl-layout-title"><a href="/">hakloev.no</a></span>
+    <nav class="mdl-navigation">
+        <a class="mdl-navigation__link {% if '/blog/' in request.path %}mdl-navigation__link--current{% endif %}" href="{% url 'blog:index' %}">blog</a>
+    </nav>
+</div>
