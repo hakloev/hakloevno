@@ -72,7 +72,6 @@ DB_HOST = os.getenv('HAKLOEVNO_DB_HOST', '')
 DB_PORT = os.getenv('HAKLOEVNO_DB_PORT', '')
 SECRET_KEY = os.getenv('HAKLOEVNO_SECRET_KEY', '')
 
-
 if PRODUCTION or STAGING:
     if PRODUCTION:
         _errors = validate(PRODUCTION_CRITICALS)
