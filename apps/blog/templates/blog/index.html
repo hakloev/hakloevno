@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load django_markdown %}
 
+{% block title %}
+    {{ block.super }}
+    - blog posts
+{% endblock %}
+
 {% block content %}
     <section class="hn-border--color-grey hn-text--centered" id="hn-border">
         <div class="mdl-grid">

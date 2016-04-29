@@ -42,8 +42,8 @@ def validate(keyset):
 
 
 # Declare what environment we are operating in
-PRODUCTION = bool(os.getenv('OF_PRODUCTION', False))
-STAGING = bool(os.getenv('OF_STAGING', False))
+PRODUCTION = 'HAKLOEVNO_PRODUCTION' in os.environ
+STAGING = 'HAKLOEVNO_STAGING' in os.environ
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not PRODUCTION
 
