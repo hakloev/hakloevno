@@ -14,7 +14,7 @@ var bases = {
 };
 
 var paths = {
-  styles: ['files/static/scss/**/*.scss', 'apps/**/scss/*.scss'],
+  styles: ['files/static/scss/**/*.scss', 'apps/*/scss/*.scss'],
   js: ['files/static/js/**/*.js', 'apps/**/js/*.js'],
   images: ['files/static/img/**/*'],
   vendor: ['files/static/vendor/**/*']
