@@ -124,6 +124,11 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.codehilite',
+    'markdown.extensions.extra',  # Tables, fenced code blocks etc
+]
+
 ROOT_URLCONF = 'hakloevno.urls'
 
 TEMPLATES = [
