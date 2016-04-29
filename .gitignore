@@ -9,3 +9,5 @@ include/
 lib/
 .Python
 pip-selfcheck.json
+node_modules/*
+files/dist/*
