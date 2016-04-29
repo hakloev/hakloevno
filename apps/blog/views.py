@@ -10,5 +10,5 @@ class BlogIndex(generic.ListView):
 
 class BlogPostDetail(generic.DetailView):
     model = models.BlogEntry
-    template_name = 'blog/blogpost.html'
+    template_name = 'blog/details.html'
 
