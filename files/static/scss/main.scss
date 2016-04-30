@@ -48,6 +48,17 @@ h3, h4 {
 
 }
 
+#hn-login {
+  margin: 0 auto;
+  padding: 50px 0;
+  max-width: 310px;
+  width: 100%;
+}
+
+.hn-login__title {
+  margin-top: 0;
+}
+
 #hn-blog-posts {
     background-color: lighten($weathered_wing, 6);
 }
@@ -178,4 +189,8 @@ h3, h4 {
 .hn-tag--color-orange {
   background: $vitamin_c;
   color: white;
+}
+
+.hn-header__lock {
+  line-height: 64px;
 }

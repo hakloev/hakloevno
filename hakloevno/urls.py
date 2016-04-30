@@ -22,6 +22,7 @@ from .views import home_files, index
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^admin/', admin.site.urls),
+    url(r'^auth/', include('apps.authentication.urls', namespace='auth')),
     url(r'^markdown/', include('django_markdown.urls')),
     url(r'^(?P<file_name>(robots.txt)|(humans.txt))$', home_files, name="home-files"),
     url(r'^blog/', include('apps.blog.urls', namespace='blog'))
