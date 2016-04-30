@@ -16,7 +16,7 @@ var bases = {
 var paths = {
   styles: ['files/static/scss/**/*.scss', 'apps/*/scss/*.scss'],
   js: ['files/static/js/**/*.js', 'apps/**/js/*.js'],
-  images: ['files/static/img/**/*'],
+  files: ['files/static/img/**/*', 'files/static/files/**/*'],
   vendor: ['files/static/vendor/**/*']
 };
 
@@ -33,13 +33,13 @@ gulp.task('clean', function () {
 });
 
 /* Copy images */
-var images = function () {
-  return gulp.src(paths.images)
-    .pipe(gulp.dest(bases.dist + 'img/'))
+var files = function () {
+  return gulp.src(paths.files)
+    .pipe(gulp.dest(bases.dist + 'files/'))
     .pipe(livereload());
 };
-gulp.task('images', ['clean'], images);
-gulp.task('images-watch', images);
+gulp.task('files', ['clean'], files);
+gulp.task('files-watch', files);
 
 
 /* Copy vendor */
@@ -82,13 +82,13 @@ gulp.task('watch', function () {
   livereload.listen();
   gulp.watch(paths.styles, ['sass-watch']);
   gulp.watch(paths.js, ['js-watch']);
-  gulp.watch(paths.images, ['images-watch']);
+  gulp.watch(paths.images, ['files-watch']);
   gulp.watch(paths.vendor, ['vendor-watch']);
 
   /* Trigger update on changes in Django Templates */
   gulp.watch('**/*/templates/*').on('change', livereload.changed);
 });
 
-gulp.task('build', ['clean', 'sass', 'js', 'vendor', 'images']); // Build all
+gulp.task('build', ['clean', 'sass', 'js', 'vendor', 'files']); // Build all
 gulp.task('watch-dev', ['build', 'watch']); // Run build, then watch
 gulp.task('default', ['build', 'watch']); // Run build, then watch
