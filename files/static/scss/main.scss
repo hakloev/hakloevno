@@ -1,7 +1,11 @@
+// Gamebookers palette
+
 $overdose: #424242;
 $weathered_wing: #E9E9E9;
 $vitamin_c: #FF9900;
 $steady_grey: lighten(#BCBCBC, 16);
+$apple: #C7F464;
+$cherry_pink: #FF6B6B;
 
 .mdl-layout__header {
   background-color: $overdose;
@@ -59,6 +63,24 @@ h3, h4 {
   margin-top: 0;
 }
 
+.hn-border--color-grey {
+  background-color: $steady_grey;
+}
+
+.hn-border--color-error {
+  background-color: $cherry_pink;
+  h5 {
+    color: white;
+  }
+}
+
+.hn-border--color-success {
+  background-color: $apple;
+  h5 {
+    color: $overdose;
+  }
+}
+
 #hn-blog-posts {
     background-color: lighten($weathered_wing, 6);
 }
@@ -91,10 +113,6 @@ h3, h4 {
 
 .hn-blog-post {
     width: 100%;
-}
-
-.hn-border--color-grey {
-  background-color: $steady_grey;
 }
 
 .hn-title h3 {
