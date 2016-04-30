@@ -11,12 +11,16 @@ $steady_grey: lighten(#BCBCBC, 16);
   background-color: $overdose;
 }
 
+.mdl-layout__header-row > .mdl-layout-title > a {
+    color: white;
+    text-decoration: none;
+}
+
 p {
   vertical-align: middle;
   font-size: 1.1em;
   font-weight: 200;
   line-height: 1.5em;
-
 }
 
 a {
@@ -53,7 +57,11 @@ h3, h4 {
     max-width: 1200px;
 }
 
-.hn-section--padding-50 {
+.hn-section--padding-30-vertical {
+    padding: 30px 0 30px 0;
+}
+
+.hn-section--padding-50-vertical {
     padding: 50px 0 50px 0;
 }
 
@@ -86,14 +94,19 @@ h3, h4 {
   font-style: italic;
 }
 
+.hn--margin-none-tb {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.hn--margin-15-tb {
+  margin: 15px 0;
+}
+
 .hn-blog-post__title {
   h3 {
     font-size: 2em;
   }
-}
-
-.hn-blog-post__ingress--margin-15-tb {
-  margin: 15px 0;
 }
 
 .hn-blog-post__ingress p {
@@ -104,6 +117,10 @@ h3, h4 {
   font-size: 0.9em;
 }
 
+.hn-blog-post__meta--text {
+
+}
+
 .hn-blog-post__content {
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
@@ -112,10 +129,6 @@ h3, h4 {
 
 .hn-blog-post--padding-20-ltr {
   padding: 20px 20px 10px 0;
-}
-
-#hn-blog-posts h3 {
-  margin-top: 0;
 }
 
 .hn-blog-post--color-white {
@@ -132,29 +145,37 @@ h3, h4 {
     text-decoration: none;
 }
 
-.mdl-layout__header-row > .mdl-layout-title > a {
-    color: white;
-    text-decoration: none;
-}
-
-.portfolio-section--max-width {
-    width: 90%;
-}
-
-.about-me__card.mdl-card {
+.hn-about-me__card.mdl-card {
     /*width: 320px;*/
     margin: 0 auto;
     float: none;
 }
 
-.about-me__card > .mdl-card__title {
+.hn-about-me__card > .mdl-card__title {
     height: 320px;
     color: white;
-    background:
-            url(/static/img/hakon.jpg) center 10% / cover;
+    background: url(/static/img/hakon.jpg) center 10% / cover;
 }
 
-.about-me__section {
-    width: 90%;
-    /*max-width: 1200px;*/
+.hn-tag {
+  border: none;
+  border-radius: 2px;
+  height: 18px;
+  margin: 0;
+  min-width: 50px;
+  padding: 0 5px;
+  display: inline-block;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-decoration: none;
+  line-height: 18px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.hn-tag--color-orange {
+  background: $vitamin_c;
+  color: white;
 }

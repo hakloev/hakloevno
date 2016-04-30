@@ -14,7 +14,7 @@
             </div>
         </div>
     </section>
-    <section class="hn-section--padding-50" id="hn-blog-posts">
+    <section class="hn-section--padding-50-vertical" id="hn-blog-posts">
         <div class="mdl-grid hn-section--max-width-85">
             <div class="mdl-cell mdl-cell--12-col">
                 <div class="mdl-grid mdl-grid--no-spacing">
@@ -24,10 +24,10 @@
                             <div class="mdl-cell mdl-cell--12-col">
                                 <div class="hn-blog-post hn-blog-post--padding-20-ltr">
                                     <div class="hn-blog-post__title">
-                                        <h3 class=""><a href="{% url 'blog:blog_post' slug=entry.slug %}">{{ entry.title }}</a></h3>
+                                        <h3 class="hn--margin-none-tb"><a href="{% url 'blog:blog_post' slug=entry.slug %}">{{ entry.title }}</a></h3>
                                     </div>
                                     <div class="hn-blog-post__meta">
-                                        <span><i>Written on {{ entry.created | date:"d. M Y H:i" }}</i></span>
+                                        <span class="hn-blog-post__meta--text"><i>Written on {{ entry.created | date:"d. M Y H:i" }}</i></span>
                                     </div>
                                     <div class="hn-blog-post__ingress">
                                         <p>{{ entry.ingress }}</p>
