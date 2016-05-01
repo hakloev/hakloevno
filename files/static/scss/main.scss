@@ -59,12 +59,20 @@ h3, h4 {
   width: 100%;
 }
 
+#hn-front-widgets {
+
+}
+
 .hn-login__title {
   margin-top: 0;
 }
 
 .hn-border--color-grey {
   background-color: $steady_grey;
+}
+
+.hn-border--color-black {
+  background-color: $overdose;
 }
 
 .hn-border--color-error {
@@ -174,16 +182,51 @@ h3, h4 {
     text-decoration: none;
 }
 
-.hn-about-me__card.mdl-card {
-    /*width: 320px;*/
-    margin: 0 auto;
-    float: none;
+.hn-about-me__card {
+  width: 100%;
 }
 
 .hn-about-me__card > .mdl-card__title {
     height: 320px;
     color: white;
-    background: url(/static/files/hakon.jpg) center 10% / cover;
+    background: url("/static/files/hakon.jpg") center 10% / cover;
+}
+
+.hn-weather__card {
+    width: 100%;
+}
+
+.hn-weather__card > .mdl-card__title {
+    align-items: flex-end;
+    height: 256px;
+    color: white;
+    background: url("/static/files/trondheim.jpg") center / cover;
+    opacity: 0.92;
+
+}
+
+.hn-bus-card__lerkendal {
+  width: 100%;
+}
+
+.hn-bus-card__lerkendal > .mdl-card__title {
+  align-items: flex-end;
+    height: 256px;
+    color: white;
+    background: url("/static/files/lerkendal.jpg") center / cover;
+    opacity: 0.92;
+}
+
+.hn-bus-card__tempe {
+  width: 100%;
+}
+
+.hn-bus-card__tempe > .mdl-card__title {
+    align-items: flex-end;
+    height: 256px;
+    color: white;
+    background: url("/static/files/tempekirke.jpg") center / cover;
+    opacity: 0.92;
 }
 
 .hn-tag {

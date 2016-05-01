@@ -32,10 +32,10 @@
                 {% block message_block %}
                     {% if messages %}
                         {% for message in messages %}
-                            <section class="hn-border--color-{{ message.tags }} hn-text--centered" id="hn-border">
+                            <section class="hn-alert hn-border--color-{{ message.tags }} hn-text--centered" id="hn-border">
                                 <div class="mdl-grid">
                                     <div class="mdl-cell--12-col">
-                                        <h5>{{ message }}</h5>
+                                        <h5>{{ message }}<span style="float:right" class="hn-alert-dismiss">close</span></h5>
                                     </div>
                                 </div>
                             </section>
