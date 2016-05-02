@@ -8,7 +8,7 @@ from . import models
 
 class BlogEntryAdmin(MarkdownModelAdmin):
     list_display = ('title', 'created')
-    prepopulated_fields = {'slug': ('title',)}
+    prepopulated_fields = {'slug': ('title', )}
     # Temporary solution, while waiting for django_markdown to support Django 1.9
     formfield_overrides = {TextField: {'widget': AdminMarkdownWidget}}
 

@@ -111,7 +111,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_markdown',
     'apps.authentication',
-    'apps.blog'
+    'apps.blog',
+    'apps.foodplan'
 ]
 
 MIDDLEWARE_CLASSES = [
