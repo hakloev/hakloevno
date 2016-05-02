@@ -52,5 +52,6 @@ var Weather = (function () {
 })();
 
 window.addEventListener('load', function () {
-    Weather.get();
+    var weather = document.getElementById('hn-weather');
+    if (weather) { Weather.get(); }
 });

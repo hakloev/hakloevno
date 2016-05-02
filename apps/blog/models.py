@@ -8,6 +8,9 @@ class Tag(models.Model):
     def __str__(self):
         return self.slug
 
+    def get_absolute_url(self):
+        return reverse('blog:tag_details', kwargs={'slug': self.slug})
+
 
 class BlogEntryQuerySet(models.QuerySet):
     def published(self):

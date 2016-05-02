@@ -12,3 +12,11 @@ class BlogPostDetail(generic.DetailView):
     model = models.BlogEntry
     template_name = 'blog/details.html'
 
+
+class TagDetail(generic.ListView):
+    model = models.BlogEntry
+    template_name = 'blog/tag_details.html'
+
+    def get_queryset(self):
+        queryset = models.BlogEntry.objects.filter(tags__slug=self.kwargs['tag'])
+        return queryset

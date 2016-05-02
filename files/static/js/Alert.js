@@ -34,7 +34,7 @@ var Alert = (function () {
 })();
 
 window.addEventListener('load', function () {
-   Alert.listener();
+  // Alert.listener();
 });
 
 // TODO: Add support for new DOM nodes as well

@@ -18,9 +18,7 @@
         <div class="mdl-grid hn-section--max-width-85">
             <div class="mdl-cell mdl-cell--12-col">
                 {% for tag in object.tags.all %}
-                   <div class="hn-tag mdl-button--raised hn-tag--color-orange">
-                        {{ tag }}
-                   </div>
+                    <a href="{% url 'blog:tag_details' tag=tag.slug %}" class="hn-tag mdl-button--raised hn-tag--color-orange">{{ tag }}</a>
                 {% endfor %}
             </div>
             <hr>
