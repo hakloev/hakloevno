@@ -1,13 +1,43 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from datetime import timedelta
 
 
-class WeekPlan(models.Model):
+class DinnerPlan(models.Model):
     start_date = models.DateField()
+    end_date = models.DateField(blank=True)
+    cost = models.FloatField(verbose_name='Total cost', blank=True, null=True)
 
     def __str__(self):
         # Display as week number
+        return 'Dinner Plan for week %s' % self._get_week_number()
+
+    def save(self, *args, **kwargs):
+        self.start_date, self.end_date = self.calculate_week_ends()
+        super(DinnerPlan, self).save(*args, **kwargs)
+
+    def _get_week_number(self):
+        """
+        Returns the week number for models instance
+        :return:
+        """
         return str(self.start_date.isocalendar()[1])
+
+    def calculate_week_ends(self):
+        """
+        Calculates start and end date for week
+        :return: beginning and end of week
+        """
+        day_of_week = self.start_date.weekday()
+        to_beginning_of_week = timedelta(days=day_of_week)
+        beginning_of_week = self.start_date - to_beginning_of_week
+        to_ending_of_week = timedelta(days=6 - day_of_week)
+        end_of_week = self.start_date + to_ending_of_week
+        return beginning_of_week, end_of_week
+
+    class Meta:
+        verbose_name = 'Dinner Plan'
+        verbose_name_plural = 'Dinner Plans'
 
 
 class Recipe(models.Model):
@@ -28,7 +58,8 @@ class Recipe(models.Model):
         ordering = ['title']
 
 
-class WeekPlanRecipes(models.Model):
+class DinnerPlanItem(models.Model):
+    # Define possible days
     MONDAY = 0
     TUESDAY = 1
     WEDNESDAY = 2
@@ -47,15 +78,15 @@ class WeekPlanRecipes(models.Model):
         (SUNDAY, 'Sunday')
     )
 
-    week = models.ForeignKey(WeekPlan)
+    period = models.ForeignKey(DinnerPlan)
     recipe = models.ForeignKey(Recipe)
     day = models.IntegerField(choices=WEEKDAYS)
 
     def __str__(self):
-        return 'Week %s, %s => %s' % (self.week, self.WEEKDAYS[self.day][1], self.recipe)
+        return '%s, week %s: %s' % (self.WEEKDAYS[self.day][1], self.period._get_week_number(), self.recipe)
 
     class Meta:
-        ordering = ['week', 'day']
-        unique_together = ('week', 'day')  # This will crash if week is not a date, need year as well
-        verbose_name = 'Plan Element'
-        verbose_name_plural = 'Plan Elements'
+        ordering = ['day', 'period']
+        unique_together = ('period', 'day')  # This will crash if week is not a date, need year as well
+        verbose_name = 'Dinner Plan Element'
+        verbose_name_plural = 'Dinner Plan Elements'
