@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="hn-section--max-width-85">
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Meal</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for meal in object.dinnerplanitem_set.all %}
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">{{ meal.get_day_display }}</td>
+                                <td class="mdl-data-table__cell--non-numeric"><b>{{ meal.recipe.title }}</b></td>
+                                <td class="mdl-data-table__cell--non-numeric"><a href="{{ meal.recipe.url }}">Link</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}
