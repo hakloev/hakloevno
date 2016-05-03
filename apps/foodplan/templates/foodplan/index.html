@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {{ most }}
     {% for plan in object_list %}
         <a href="{% url 'food:plan_details' year=plan.start_date|date:"Y" week=plan.start_date|date:"W" %}">Week {{ plan.start_date|date:"W" }}</a><br>
     {% endfor %}

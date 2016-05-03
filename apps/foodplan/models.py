@@ -95,7 +95,7 @@ class DinnerPlanItem(models.Model):
         return '%s, week %s: %s' % (self.WEEKDAYS[self.day][1], str(self.period.get_week_number()), self.recipe)
 
     class Meta:
-        ordering = ['day', 'period']
+        ordering = ['period', 'day']
         unique_together = ('period', 'day')  # This will crash if week is not a date, need year as well
         verbose_name = 'Dinner Plan Element'
         verbose_name_plural = 'Dinner Plan Elements'
