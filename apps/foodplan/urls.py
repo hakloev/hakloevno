@@ -1,6 +1,6 @@
 from django.conf.urls import url
+from . import views
 
 urlpatterns = [
-    url(r'^$', None, name='index')
+    url(r'^$', views.FoodPlanIndex.as_view(), name='index')
 ]
-
