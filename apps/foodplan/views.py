@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from django.db.models import Count
+from django.db.models import Avg, Count
 from datetime import datetime
 from . import utils
 from . import models
@@ -18,7 +18,9 @@ class DinnerPlanIndex(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(DinnerPlanIndex, self).get_context_data()
-        context['most'] = models.Recipe.objects.get(id=models.DinnerPlanItem.objects.values('recipe__id').annotate(num_recipes=Count('recipe_id')).latest('num_recipes')['recipe__id'])
+        context['average_cost'] = models.DinnerPlan.objects.aggregate(Avg('cost'))['cost__avg']
+        print(context['average_cost'])
+        context['most_eaten'] = models.Recipe.objects.get(id=models.DinnerPlanItem.objects.values('recipe__id').annotate(num_recipes=Count('recipe_id')).latest('num_recipes')['recipe__id'])
         return context
 
 

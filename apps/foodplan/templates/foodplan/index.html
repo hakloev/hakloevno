@@ -4,16 +4,16 @@
      <section class="hn-border--color-grey hn-text--centered" id="hn-border">
         <div class="mdl-grid">
             <div class="mdl-cell--12-col">
-                <h1>newest plan: week {{ newest_plan.start_date|date:"W" }}</h1>
+                <h1>dinner plan: week {{ newest_plan.start_date|date:"W" }}</h1>
             </div>
         </div>
     </section>
     <section class="hn-padding-50-vertical">
-        <div class="mdl-grid hn-container--max-width-85">
+        <div class="mdl-grid hn-container--max-width-75 hn-container--max-width-95-phone">
             <div class="mdl-cell mdl-cell--12-col">
                 <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--8-col">
-                        <ul class="mdl-list">
+                    <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                        <ul class="mdl-list" id="hn-food-list">
                             {% for meal in newest_plan.dinnerplanitem_set.all %}
                                 <li class="mdl-list__item mdl-list__item--two-line">
                                     <span class="mdl-list__item-primary-content">
@@ -29,11 +29,35 @@
                             {% endfor %}
                         </ul>
                     </div>
+                    <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone hn-text--right hn-text--left-phone hn-text--left-tablet">
+                        <div class="hn-food-stats">
+                            <div class="hn-food-stats__header">
+                                <p class="hn-food-stats__header-text">Total cost this week:</p>
+                            </div>
+                            <div class="hn-food-stats__detail">
+                                <h3 class="hn-food-stats__detail-text">{{ newest_plan.cost }} kr</h3>
+                            </div>
+                        </div>
+                        <div class="hn-food-stats">
+                            <div class="hn-food-stats__header">
+                                <p class="hn-food-stats__header-text">Average cost of all weeks:</p>
+                            </div>
+                            <div class="hn-food-stats__detail">
+                                <h3 class="hn-food-stats__detail-text">{{ average_cost }} kr</h3>
+                            </div>
+                        </div>
+                        <div class="hn-food-stats">
+                            <div class="hn-food-stats__header">
+                                <p class="hn-food-stats__header-text">Most eaten meal:</p>
+                            </div>
+                            <div class="hn-food-stats__detail">
+                                <h3 class="hn-food-stats__detail-text">{{ most_eaten }}</h3>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 {#                <a href="{% url 'food:plan_details' year=newest_plan.start_date|date:"Y" week=newest_plan.week %}">Week {{ newest_plan.start_date|date:"W" }}</a><br>#}
-            </div>
-            <div class="mdl-cell mdl-cell--4-col">
-
             </div>
         </div>
     </section>

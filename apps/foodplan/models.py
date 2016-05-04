@@ -32,7 +32,7 @@ class DinnerPlanQuerySet(models.QuerySet):
 class DinnerPlan(models.Model):
     start_date = models.DateField()
     end_date = models.DateField(blank=True)
-    cost = models.FloatField(verbose_name='Total cost', blank=True, null=True)
+    cost = models.FloatField(verbose_name='Total cost', blank=True, default=.0)
     meals = models.ManyToManyField(Recipe, through='DinnerPlanItem')
 
     objects = DinnerPlanQuerySet.as_manager()
@@ -61,6 +61,7 @@ class DinnerPlan(models.Model):
         verbose_name = 'Dinner Plan'
         verbose_name_plural = 'Dinner Plans'
         get_latest_by = 'end_date'
+        ordering = ['-end_date']
 
 
 class DinnerPlanItem(models.Model):
