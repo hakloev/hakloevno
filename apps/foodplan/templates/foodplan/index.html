@@ -1,8 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {{ most }}
-    {% for plan in object_list %}
-        <a href="{% url 'food:plan_details' year=plan.start_date|date:"Y" week=plan.start_date|date:"W" %}">Week {{ plan.start_date|date:"W" }}</a><br>
-    {% endfor %}
+     <section class="hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-grid">
+            <div class="mdl-cell--12-col">
+                <h1>newest plan: week {{ newest_plan.start_date|date:"W" }}</h1>
+            </div>
+        </div>
+    </section>
+    <section class="hn-padding-50-vertical">
+        <div class="mdl-grid hn-container--max-width-85">
+            <div class="mdl-cell mdl-cell--12-col">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--8-col">
+                        <ul class="mdl-list">
+                            {% for meal in newest_plan.dinnerplanitem_set.all %}
+                                <li class="mdl-list__item mdl-list__item--two-line">
+                                    <span class="mdl-list__item-primary-content">
+                                        <span>{{ meal.get_day_display }}</span>
+                                        <span class="mdl-list__item-sub-title"><a href="{{ meal.recipe.url }}" target="_blank">{{ meal.recipe.title }}</a></span>
+                                    </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-{{ meal.day }}">
+                                            <input type="checkbox" id="list-checkbox-{{ meal.day }}" class="mdl-checkbox__input" {% if meal.eaten %}checked{% endif %} />
+                                        </label>
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+{#                <a href="{% url 'food:plan_details' year=newest_plan.start_date|date:"Y" week=newest_plan.week %}">Week {{ newest_plan.start_date|date:"W" }}</a><br>#}
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+
+            </div>
+        </div>
+    </section>
 {% endblock %}

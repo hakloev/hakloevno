@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for object in object_list %}
-        {{ object }}
-    {% endfor %}
+     <section class="hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-grid">
+            <div class="mdl-cell--12-col">
+                <h1>{{ tag }}</h1>
+            </div>
+        </div>
+    </section>
+    <section class="hn-padding-50-vertical">
+        <div class="mdl-grid hn-container--max-width-85">
+            <div class="mdl-cell mdl-cell--12-col">
+                {% for object in object_list %}
+                    {{ object.title }}
+                {% endfor %}
+                <br>all blog posts for tag here
+            </div>
+        </div>
+    </section>
 {% endblock %}

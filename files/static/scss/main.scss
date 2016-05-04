@@ -1,18 +1,18 @@
 // Gamebookers palette
 
-$overdose: #424242;
+$grey: #424242;
 $weathered_wing: #E9E9E9;
-$vitamin_c: #FF9900;
-$steady_grey: lighten(#BCBCBC, 16);
+$orange: #FF9900;
+$light_grey: lighten(#BCBCBC, 16);
 $apple: #C7F464;
 $cherry_pink: #FF6B6B;
 
 .mdl-layout__header {
-  background-color: $overdose;
+  background-color: $grey;
 }
 
 .mdl-mini-footer {
-  background-color: $overdose;
+  background-color: $grey;
 }
 
 .mdl-layout__header-row > .mdl-layout-title > a {
@@ -29,11 +29,11 @@ p {
 
 a {
   text-decoration: none;
-  color: $vitamin_c;
+  color: $orange;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: $vitamin_c;
+  color: $orange;
 }
 
 h1, h2 {
@@ -44,12 +44,8 @@ h3, h4 {
   font-weight: 200;
   a {
     font-weight: 200;
-    color: lighten($vitamin_c, 10);
+    color: lighten($orange, 10);
   }
-}
-
-#hn-about-me {
-
 }
 
 #hn-login {
@@ -59,20 +55,16 @@ h3, h4 {
   width: 100%;
 }
 
-#hn-front-widgets {
-
-}
-
 .hn-login__title {
   margin-top: 0;
 }
 
 .hn-border--color-grey {
-  background-color: $steady_grey;
+  background-color: $light_grey;
 }
 
 .hn-border--color-black {
-  background-color: $overdose;
+  background-color: $grey;
 }
 
 .hn-border--color-error {
@@ -85,7 +77,7 @@ h3, h4 {
 .hn-border--color-success {
   background-color: $apple;
   h5 {
-    color: $overdose;
+    color: $grey;
   }
 }
 
@@ -93,21 +85,25 @@ h3, h4 {
     background-color: lighten($weathered_wing, 6);
 }
 
-.hn-section--max-width-85 {
+.hn-container--max-width-85 {
     width: 85%;
     max-width: 1200px;
 }
 
-.hn-section--padding-30-vertical {
+.hn-padding-30-vertical {
     padding: 30px 0 30px 0;
 }
 
-.hn-section--padding-50-vertical {
+.hn-padding-50-vertical {
     padding: 50px 0 50px 0;
 }
 
 .hn-text--centered {
     text-align: center;
+}
+
+.hn-text--left {
+    text-align: left;
 }
 
 .hn-about-me__text {
@@ -116,7 +112,7 @@ h3, h4 {
 }
 
 .hn-text-color--orange {
-    color: $vitamin_c;
+    color: $orange;
 }
 
 .hn-blog-post {
@@ -248,7 +244,7 @@ h3, h4 {
 }
 
 .hn-tag--color-orange {
-  background: $vitamin_c;
+  background: $orange;
   color: white;
 }
 

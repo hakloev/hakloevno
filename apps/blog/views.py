@@ -20,3 +20,8 @@ class TagDetail(generic.ListView):
     def get_queryset(self):
         queryset = models.BlogEntry.objects.filter(tags__slug=self.kwargs['tag'])
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(TagDetail, self).get_context_data(**kwargs)
+        context['tag'] = self.kwargs['tag']
+        return context
