@@ -19,7 +19,6 @@ class DinnerPlanIndex(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(DinnerPlanIndex, self).get_context_data()
         context['average_cost'] = models.DinnerPlan.objects.aggregate(Avg('cost'))['cost__avg']
-        print(context['average_cost'])
         context['most_eaten'] = models.Recipe.objects.get(id=models.DinnerPlanItem.objects.values('recipe__id').annotate(num_recipes=Count('recipe_id')).latest('num_recipes')['recipe__id'])
         return context
 
