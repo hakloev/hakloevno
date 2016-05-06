@@ -1,23 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <section class="hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-grid">
+            <div class="mdl-cell--12-col">
+                <h1>dinner plan: week {{ object.start_date|date:"W" }}</h1>
+            </div>
+        </div>
+    </section>
     <section class="hn-section--padding-50-vertical">
-        <div class="mdl-grid hn-section--max-width-85">
+        <div class="mdl-grid hn-container--max-width-85">
             <div class="mdl-cell mdl-cell--12-col">
+                {% if not_added|length > 0 %}
+                    Missing days: {{ not_added }}
+                    <a href="{% url 'food:plan_item_add' year=object.year week=object.week %}">Add </a>
+                {% endif %}
                 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                     <thead>
                         <tr>
-                            <th>Day</th>
-                            <th>Meal</th>
-                            <th>Eaten</th>
+                            <th class="mdl-data-table__cell--non-numeric">Day</th>
+                            <th class="mdl-data-table__cell--non-numeric">Meal</th>
+                            <th class="mdl-data-table__cell--non-numeric">Eaten</th>
+                            <th class="mdl-data-table__cell--non-numeric">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for meal in object.dinnerplanitem_set.all %}
+                        {% for meal in meals %}
                             <tr>
                                 <td class="mdl-data-table__cell--non-numeric">{{ meal.get_day_display }}</td>
                                 <td class="mdl-data-table__cell--non-numeric"><a href="{{ meal.recipe.url }}" target="_blank">{{ meal.recipe.title }}</a></td>
-                                <td></td>
+                                <td class="mdl-data-table__cell--non-numeric">{{ meal.eaten }}</td>
+                                <td class="mdl-data-table__cell--non-numeric"><a href="{% url 'food:plan_item_edit' year=object.year week=object.week day=meal.day %}">Edit</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

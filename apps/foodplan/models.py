@@ -30,10 +30,9 @@ class DinnerPlanQuerySet(models.QuerySet):
 
 
 class DinnerPlan(models.Model):
-    start_date = models.DateField()
+    start_date = models.DateField(unique=True)
     end_date = models.DateField(blank=True)
     cost = models.FloatField(verbose_name='Total cost', blank=True, default=.0)
-    meals = models.ManyToManyField(Recipe, through='DinnerPlanItem')
 
     objects = DinnerPlanQuerySet.as_manager()
 
@@ -44,6 +43,10 @@ class DinnerPlan(models.Model):
         :return: String representation of the week number
         """
         return str(utils.get_week_from_date(self.start_date))
+
+    @property
+    def year(self):
+        return str(self.start_date.year)
 
     def __str__(self):
         # Display as week number
@@ -84,16 +87,16 @@ class DinnerPlanItem(models.Model):
         (SUNDAY, 'Sunday')
     )
 
-    period = models.ForeignKey(DinnerPlan, on_delete=models.CASCADE)
+    plan = models.ForeignKey(DinnerPlan, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     day = models.IntegerField(choices=WEEKDAYS)
     eaten = models.BooleanField(default=False)
 
     def __str__(self):
-        return '%s, week %s: %s' % (self.WEEKDAYS[self.day][1], str(self.period.week), self.recipe)
+        return '%s, week %s: %s' % (self.WEEKDAYS[self.day][1], str(self.plan.week), self.recipe)
 
     class Meta:
-        ordering = ['period', 'day']
-        unique_together = ('period', 'day')  # This will crash if week is not a date, need year as well
+        ordering = ['plan', 'day']
+        unique_together = ('plan', 'day')  # This will crash if week is not a date, need year as well
         verbose_name = 'Dinner Plan Element'
         verbose_name_plural = 'Dinner Plan Elements'
