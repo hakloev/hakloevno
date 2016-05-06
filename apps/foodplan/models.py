@@ -26,7 +26,7 @@ class DinnerPlanQuerySet(models.QuerySet):
     def current_plan(self):
         today = datetime.today()
         start, end = utils.calculate_week_ends_for_date(today)
-        return self.filter(start_date=start).first()
+        return self.get(start_date=start)
 
 
 class DinnerPlan(models.Model):
@@ -87,16 +87,31 @@ class DinnerPlanItem(models.Model):
         (SUNDAY, 'Sunday')
     )
 
-    plan = models.ForeignKey(DinnerPlan, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    plan = models.ForeignKey(
+        DinnerPlan,
+        related_name='items',
+        related_query_name='item',
+        on_delete=models.CASCADE
+    )
+
+    recipe = models.ForeignKey(
+        Recipe,
+        related_name='items',
+        related_query_name='item',
+        on_delete=models.CASCADE
+    )
+
     day = models.IntegerField(choices=WEEKDAYS)
     eaten = models.BooleanField(default=False)
 
     def __str__(self):
-        return '%s, week %s: %s' % (self.WEEKDAYS[self.day][1], str(self.plan.week), self.recipe)
+        return '%s, week %s: %s' % (self.WEEKDAYS[self.day][1],
+                                    DinnerPlan.objects.get(item=self).week,
+                                    Recipe.objects.get(item=self).title
+                                    )
 
     class Meta:
         ordering = ['plan', 'day']
         unique_together = ('plan', 'day')  # This will crash if week is not a date, need year as well
-        verbose_name = 'Dinner Plan Element'
-        verbose_name_plural = 'Dinner Plan Elements'
+        verbose_name = 'Dinner Plan Item'
+        verbose_name_plural = 'Dinner Plan Items'

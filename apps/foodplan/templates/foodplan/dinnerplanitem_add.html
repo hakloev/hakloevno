@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{#    {{ test }}#}
+
     <form method="post">
         {% csrf_token %}
         {{ form }}

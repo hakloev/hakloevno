@@ -4,7 +4,7 @@
      <section class="hn-border--color-grey hn-text--centered" id="hn-border">
         <div class="mdl-grid">
             <div class="mdl-cell--12-col">
-                <h1>dinner plan: week {{ newest_plan.start_date|date:"W" }}</h1>
+                <h1>dinner plan: week {{ plan.week }}</h1>
             </div>
         </div>
     </section>
@@ -14,7 +14,7 @@
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
                         <ul class="mdl-list" id="hn-food-list">
-                            {% for meal in meals %}
+                            {% for meal in plan.items.all %}
                                 <li class="mdl-list__item mdl-list__item--two-line">
                                     <span class="mdl-list__item-primary-content">
                                         <span>{{ meal.get_day_display }}</span>
@@ -35,7 +35,7 @@
                                 <p class="hn-food-stats__header-text">Total cost this week:</p>
                             </div>
                             <div class="hn-food-stats__detail">
-                                <h3 class="hn-food-stats__detail-text">{{ newest_plan.cost }} kr</h3>
+                                <h3 class="hn-food-stats__detail-text">{{ plan.cost }} kr</h3>
                             </div>
                         </div>
                         <div class="hn-food-stats">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div>
-                            <a href="{% url 'food:plan_details' year=newest_plan.start_date|date:"Y" week=newest_plan.week %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                            <a href="{% url 'food:plan_details' year=plan.year week=plan.week %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
                                 Edit Current Plan
                             </a>
                             <a href="{% url 'food:plan_create' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
@@ -64,7 +64,6 @@
                         </div>
                     </div>
                 </div>
-{#                <a href="{% url 'food:plan_details' year=newest_plan.start_date|date:"Y" week=newest_plan.week %}">Week {{ newest_plan.start_date|date:"W" }}</a><br>#}
             </div>
         </div>
     </section>
