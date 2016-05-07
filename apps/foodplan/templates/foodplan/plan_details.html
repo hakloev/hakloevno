@@ -11,30 +11,22 @@
     <section class="hn-padding-50-vertical">
         <div class="mdl-grid hn-container--max-width-85">
             <div class="mdl-cell mdl-cell--12-col">
-                {% if not_added|length > 0 %}
-                    Missing days: {{ not_added }}
-                    <a href="{% url 'food:plan_edit' year=plan.year week=plan.week %}">Edit</a>
-                {% endif %}
-                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                    <thead>
-                        <tr>
-                            <th class="mdl-data-table__cell--non-numeric">Day</th>
-                            <th class="mdl-data-table__cell--non-numeric">Meal</th>
-                            <th class="mdl-data-table__cell--non-numeric">Eaten</th>
-                            <th class="mdl-data-table__cell--non-numeric">Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for meal in plan.items.all %}
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">{{ meal.get_day_display }}</td>
-                                <td class="mdl-data-table__cell--non-numeric"><a href="{{ meal.recipe.url }}" target="_blank">{{ meal.recipe.title }}</a></td>
-                                <td class="mdl-data-table__cell--non-numeric">{{ meal.eaten }}</td>
-                                <td class="mdl-data-table__cell--non-numeric"><a href="{% url 'food:plan_item_edit' year=object.year week=object.week day=meal.day %}">Edit</a></td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <ul class="mdl-list" id="hn-food-list">
+                    {% for meal in plan.items.all %}
+                        <li class="mdl-list__item mdl-list__item--two-line">
+                            <span class="mdl-list__item-primary-content">
+                                <span>{{ meal.get_day_display }}</span>
+                                <span class="mdl-list__item-sub-title"><a href="{{ meal.recipe.url }}" target="_blank">{{ meal.recipe.title }}</a></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-{{ meal.day }}">
+                                    <input type="checkbox" id="list-checkbox-{{ meal.day }}" class="mdl-checkbox__input" {% if meal.eaten %}checked{% endif %} />
+                                </label>
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'food:plan_edit' year=plan.year week=plan.week %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Edit Plan</a>
             </div>
         </div>
     </section>

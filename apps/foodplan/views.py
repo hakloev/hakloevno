@@ -1,6 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.http.response import JsonResponse
-from django.core.urlresolvers import reverse
 from django.views import generic
 from django.db.models import Avg, Count
 from django.core.exceptions import ObjectDoesNotExist
@@ -52,14 +51,6 @@ class DinnerPlanIndex(generic.DetailView):
 class DinnerPlanDetails(DinnerPlanObjectQueryMixin, generic.DetailView):
     template_name = 'foodplan/plan_details.html'
     context_object_name = 'plan'
-
-    def get_context_data(self, **kwargs):
-        context = super(DinnerPlanDetails, self).get_context_data()
-        meals = models.DinnerPlanItem.objects.filter(plan=self.object)
-        days = set([i for i in range(7)])
-        not_added = days.difference(set([meals[i].day for i in range(len(meals))]))
-        context['not_added'] = not_added
-        return context
 
 
 class DinnerPlanCreate(generic.CreateView):
@@ -114,65 +105,6 @@ class DinnerPlanUpdate(DinnerPlanObjectQueryMixin, generic.UpdateView):
             return redirect(self.object.get_absolute_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))
-
-
-class DinnerPlanItemUpdate(generic.UpdateView):
-    model = models.DinnerPlanItem
-    fields = ['recipe', 'eaten']
-    template_name = 'foodplan/dinnerplanitem_edit.html'
-
-    def get_object(self, queryset=None):
-        query = '%s-W%s' % (self.kwargs['year'], self.kwargs['week'])
-        week_start = utils.get_start_date_from_year_and_week(query)
-        model = models.DinnerPlanItem.objects.get(day=self.kwargs['day'], plan__start_date=week_start)
-        return model
-
-    def get_success_url(self):
-        return reverse('food:plan_details', kwargs={'year': self.object.plan.year,
-                                                    'week': self.object.plan.week})
-
-"""
-class DinnerPlanItemAdd(generic.CreateView):
-    model = models.DinnerPlanItem
-    template_name = 'foodplan/dinnerplanitem_add.html'
-
-    def get_form_class(self):
-        return forms.CustomAddPlanItemForm
-
-    def get_form_kwargs(self, **kwargs):
-        kwargs = super(DinnerPlanItemAdd, self).get_form_kwargs(**kwargs)
-        if 'data' in kwargs:
-            query = '%s-W%s' % (self.kwargs['year'], self.kwargs['week'])
-            week_start = utils.get_start_date_from_year_and_week(query)
-            plan = models.DinnerPlan.objects.get(start_date=week_start)
-            instance = models.DinnerPlanItem(plan=plan)
-            kwargs.update({'instance': instance})
-        return kwargs
-
-    def get_success_url(self):
-        plan = models.DinnerPlan.objects.get(item=self.object)
-        return reverse('food:plan_details', kwargs={'year': str(plan.year),
-                                                    'week': str(plan.week)})
-
-
-# class DinnerPlanItemAdd(generic.CreateView):
-#     model = models.Recipe
-#     form_class = forms.DinnerPlanItemAddForm
-#     template_name = 'foodplan/dinnerplanitem_add.html'
-#     TODO: Success url to plan details
-    #
-    # def get_initial(self):
-    #     query = '%s-W%s' % (self.kwargs['year'], self.kwargs['week'])
-    #     week_start = utils.get_start_date_from_year_and_week(query)
-    #     dinner_plan = get_object_or_404(models.DinnerPlan, start_date=week_start)
-    #     return {'start_date': week_start}
-    #
-    # def get_success_url(self):
-    #     TODO: Not sure if safe to use kwargs here
-        # return reverse('food:plan_details', kwargs={'year': self.kwargs['year'],
-        #                                             'week': self.kwargs['week']})
-
-"""
 
 
 def recipe_json(request):

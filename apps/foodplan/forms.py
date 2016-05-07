@@ -19,33 +19,20 @@ class DinnerPlanForm(forms.ModelForm):
         model = models.DinnerPlan
         exclude = ['end_date']
         widgets = {
-            'start_date': forms.TextInput(attrs={'class': 'mdl-textfield__input'}),
-            'cost': forms.TextInput(attrs={'class': 'mdl-textfield__input'})
+            'start_date': forms.TextInput(attrs={
+                'class': 'mdl-textfield__input'
+            }),
+            'cost': forms.TextInput(attrs={
+                'class': 'mdl-textfield__input'
+            })
         }
-        # fields = ['start_date', 'cost']
 
 
-"""
-class CustomAddPlanItemForm(forms.ModelForm):
-    class Meta:
-        model = models.DinnerPlanItem
-        fields = ['day', 'recipe']
-"""
-
-"""
-class DinnerPlanItemForm(forms.ModelForm):
-    class Meta:
-        model = models.DinnerPlanItem
-        exclude = []
-"""
-
-ItemFormSet = inlineformset_factory(models.DinnerPlan,
-                                    models.DinnerPlanItem,
-                                    form=DinnerPlanForm,
-                                    extra=0,
+ItemFormSet = inlineformset_factory(models.DinnerPlan, models.DinnerPlanItem, form=DinnerPlanForm, extra=0,
                                     can_delete=False,
                                     widgets={
                                         'recipe': forms.Select(attrs={'class': 'recipe-select2'}),
-                                        'day': forms.Select(attrs={'class': 'day-select2'})
+                                        'day': forms.Select(attrs={'class': 'day-select2'}),
+                                        'eaten': forms.CheckboxInput(attrs={'class': 'mdl-checkbox__input'})
                                     })
 

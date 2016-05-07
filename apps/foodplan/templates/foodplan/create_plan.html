@@ -30,7 +30,17 @@
                      <div class="meals">
                          {% for meal_form in formset %}
                              <div id="item-{{ forloop.counter0 }}">
-                                {{ meal_form }}
+                             {% for field in meal_form %}
+                                 {% if forloop.counter0 == 3 %}
+                                     {{ field.form.errors }}
+                                     <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{ field.id_for_label }}">
+                                        {{ field }}
+                                        <span class="mdl-checkbox__label">{{ field.name }}</span>
+                                     </label>
+                                 {% else %}
+                                     {{ field }}
+                                 {% endif %}
+                             {% endfor %}
                              </div>
                         {% endfor %}
                      </div>
@@ -48,43 +58,4 @@
             </div>
         </div>
     </section>
-
-    <script type="text/html" id="meal-template">
-       <div id="item-<%= id %>">
-           <label for="id_items-<%= id %>-recipe">Recipe:</label>
-           <select class="recipe-select2" id="id_items-<%= id %>-recipe" name="items-<%= id %>-recipe">
-               <%= recipes %>
-            </select>
-            <label for="id_items-<%= id %>-day">Day:</label>
-            <select class="day-select2" id="id_items-<%= id %>-day" name="items-<%= id %>-day">
-                <%= days %>
-            </select>
-           <label for="id_items-<%= id %>-eaten">Eaten:</label><input id="id_items-<%= id %>-eaten" name="items-<%= id %>-eaten" type="checkbox">
-           <input id="id_items-<%= id %>-plan" name="items-<%= id %>-plan" type="hidden"><input id="id_items-<%= id %>-id" name="items-<%= id %>-id" type="hidden">
-        </div>
-    </script>
-
-    <script>
-        $('.add-meal').click(function (e) {
-            e.preventDefault();
-            var count = $('.meals').children().length;
-            var recipes = $('#id_items-0-recipe').html();
-            var days = $('#id_items-0-day').html();
-            var templateMarkup = $('#meal-template').html();
-            var compiledTemplate = _.template(templateMarkup)({ id : count, recipes: recipes, days: days });
-            $('div.meals').append(compiledTemplate);
-            $('#id_items-TOTAL_FORMS').attr('value', count + 1);
-            $('#id_items-' + count + '-recipe').select2();
-            $('#id_items-' + count + '-day').select2();
-            console.log(count)
-            if (count == 6) {
-                $('.add-meal').remove();
-            }
-        });
-
-       $(document).ready(function() {
-            $('.recipe-select2').select2();
-            $('.day-select2').select2();
-       });
-    </script>
 {% endblock %}
