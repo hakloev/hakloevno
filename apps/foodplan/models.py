@@ -1,11 +1,12 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from datetime import datetime
+from django.core import serializers
 from . import utils
 
 
 class Recipe(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, blank=False, null=False)
     url = models.URLField(blank=False)
     slug = models.SlugField(max_length=100, unique=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -15,6 +16,12 @@ class Recipe(models.Model):
 
     def get_absolute_url(self):
         return reverse('food:recipe', kwargs={'slug': self.slug})
+
+    def to_json(self):
+        return {
+            'pk': self.pk,
+            'title': self.title
+        }
 
     class Meta:
         verbose_name = 'Recipe'
@@ -101,7 +108,7 @@ class DinnerPlanItem(models.Model):
         on_delete=models.CASCADE
     )
 
-    day = models.IntegerField(choices=WEEKDAYS)
+    day = models.IntegerField(choices=WEEKDAYS, blank=False, null=False)
     eaten = models.BooleanField(default=False)
 
     def __str__(self):

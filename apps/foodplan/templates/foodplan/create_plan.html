@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+     <section class="hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-grid">
+            <div class="mdl-cell--12-col">
+                {% if plan %}
+                    <h1>edit plan: week {{ plan.week }}</h1>
+                {% else %}
+                    <h1>create plan</h1>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <section class="hn-padding-50-vertical">
+        <div class="mdl-grid hn-container--max-width-85">
+            <div class="mdl-cell--12-col">
+                 <form method="post">
+                     {% csrf_token %}
+                     {% for field in form %}
+                         <div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                {{ field }}
+                                <label class="mdl-textfield__label" for="{{ field.name }}">{{ field.name }}</label>
+                            </div>
+                         </div>
+                     {% endfor %}
+{#                   {{ form }}#}
+                     {{ formset.management_form }}
+                     <div class="meals">
+                         {% for meal_form in formset %}
+                             <div id="item-{{ forloop.counter0 }}">
+                                {{ meal_form }}
+                             </div>
+                        {% endfor %}
+                     </div>
+                     <div class="form-actions">
+                        {% if formset|length < 7 %}
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored add-meal">Add Meal</button>
+                        {% endif %}
+                        {% if plan %}
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Update Plan</button>
+                        {% else %}
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create Plan</button>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/html" id="meal-template">
+       <div id="item-<%= id %>">
+           <label for="id_items-<%= id %>-recipe">Recipe:</label>
+           <select class="recipe-select2" id="id_items-<%= id %>-recipe" name="items-<%= id %>-recipe">
+               <%= recipes %>
+            </select>
+            <label for="id_items-<%= id %>-day">Day:</label>
+            <select class="day-select2" id="id_items-<%= id %>-day" name="items-<%= id %>-day">
+                <%= days %>
+            </select>
+           <label for="id_items-<%= id %>-eaten">Eaten:</label><input id="id_items-<%= id %>-eaten" name="items-<%= id %>-eaten" type="checkbox">
+           <input id="id_items-<%= id %>-plan" name="items-<%= id %>-plan" type="hidden"><input id="id_items-<%= id %>-id" name="items-<%= id %>-id" type="hidden">
+        </div>
+    </script>
+
+    <script>
+        $('.add-meal').click(function (e) {
+            e.preventDefault();
+            var count = $('.meals').children().length;
+            var recipes = $('#id_items-0-recipe').html();
+            var days = $('#id_items-0-day').html();
+            var templateMarkup = $('#meal-template').html();
+            var compiledTemplate = _.template(templateMarkup)({ id : count, recipes: recipes, days: days });
+            $('div.meals').append(compiledTemplate);
+            $('#id_items-TOTAL_FORMS').attr('value', count + 1);
+            $('#id_items-' + count + '-recipe').select2();
+            $('#id_items-' + count + '-day').select2();
+            console.log(count)
+            if (count == 6) {
+                $('.add-meal').remove();
+            }
+        });
+
+       $(document).ready(function() {
+            $('.recipe-select2').select2();
+            $('.day-select2').select2();
+       });
+    </script>
+{% endblock %}

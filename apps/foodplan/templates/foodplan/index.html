@@ -35,7 +35,7 @@
                                 <p class="hn-food-stats__header-text">Total cost this week:</p>
                             </div>
                             <div class="hn-food-stats__detail">
-                                <h3 class="hn-food-stats__detail-text">{{ plan.cost }} kr</h3>
+                                <h3 class="hn-food-stats__detail-text">{{ plan.cost|floatformat:2 }} kr</h3>
                             </div>
                         </div>
                         <div class="hn-food-stats">
@@ -43,7 +43,7 @@
                                 <p class="hn-food-stats__header-text">Average cost of all weeks:</p>
                             </div>
                             <div class="hn-food-stats__detail">
-                                <h3 class="hn-food-stats__detail-text">{{ average_cost }} kr</h3>
+                                <h3 class="hn-food-stats__detail-text">{{ average_cost|floatformat:2 }} kr</h3>
                             </div>
                         </div>
                         <div class="hn-food-stats">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div>
-                            <a href="{% url 'food:plan_details' year=plan.year week=plan.week %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                            <a href="{% url 'food:plan_edit' year=plan.year week=plan.week %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
                                 Edit Current Plan
                             </a>
                             <a href="{% url 'food:plan_create' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">

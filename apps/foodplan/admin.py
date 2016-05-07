@@ -8,6 +8,7 @@ class DinnerPlanItemInline(admin.TabularInline):
     Adds inline form with DinnerPlanItems for the DinnerPlanAdmin
     """
     model = models.DinnerPlanItem
+    extra = 0
 
 
 class RecipeAdmin(admin.ModelAdmin):
