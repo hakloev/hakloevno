@@ -20,11 +20,10 @@ class DinnerPlanForm(forms.ModelForm):
         exclude = ['end_date']
         widgets = {
             'start_date': forms.TextInput(attrs={
-                'placeholder': 'Start Date: yyyy-mm-dd',
+                'placeholder': 'yyyy-mm-dd',
                 'class': 'mdl-textfield__input'
             }),
             'cost': forms.TextInput(attrs={
-                'placeholder': 'Cost',
                 'class': 'mdl-textfield__input'
             })
         }

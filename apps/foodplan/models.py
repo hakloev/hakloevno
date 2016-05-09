@@ -37,9 +37,9 @@ class DinnerPlanQuerySet(models.QuerySet):
 
 
 class DinnerPlan(models.Model):
-    start_date = models.DateField(unique=True)
+    start_date = models.DateField(verbose_name='Start Date', unique=True)
     end_date = models.DateField(blank=True)
-    cost = models.FloatField(verbose_name='Total cost', blank=True, default=.0)
+    cost = models.FloatField(blank=True, default=.0)
 
     objects = DinnerPlanQuerySet.as_manager()
 

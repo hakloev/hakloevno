@@ -12,35 +12,41 @@
             </div>
         </div>
     </section>
-    <section class="hn-padding-50-vertical">
+    <section class="hn-padding-50-vertical" id="hn-food">
         <div class="mdl-grid hn-container--max-width-85">
             <div class="mdl-cell--12-col">
                  <form method="post">
                      {% csrf_token %}
+                     {{ formset.management_form }}
                      {% for field in form %}
                          <div>
-                            <div class="mdl-textfield mdl-js-textfield">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {{ field }}
-                                <label class="mdl-textfield__label" for="{{ field.name }}">{{ field.name }}</label>
+                                <label class="mdl-textfield__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
                             </div>
                          </div>
                      {% endfor %}
-{#                   {{ form }}#}
-                     {{ formset.management_form }}
-                     <div class="meals">
-                         {% for meal_form in formset %}
-                             <div id="item-{{ forloop.counter0 }}">
-                             {% for field in meal_form %}
-                                 {% if forloop.counter0 == 3 %}
-                                     {{ field.form.errors }}
+                     <div class="hn-food__meal-form">
+
+                         {% for meal_form in formset.forms %}
+                             <div id="item-{{ forloop.counter0 }}" class="hn-food__meal-inline-form">
+                             {% for hidden in meal_form.hidden_fields %}
+                                 {{ hidden }}
+                             {% endfor %}
+                             {% for field in meal_form.visible_fields %}
+                                 {% if forloop.counter0 == 2 %}
                                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{ field.id_for_label }}">
-                                        {{ field }}
                                         <span class="mdl-checkbox__label">{{ field.name }}</span>
+                                        {{ field }}
                                      </label>
                                  {% else %}
+                                     {{ field.label_tag }}
                                      {{ field }}
                                  {% endif %}
                              {% endfor %}
+                             {% if meal_form.non_field_errors %}
+                                 <p class="hn-food__meal-form-error">{{ meal_form.non_field_errors.as_text }}</p>
+                             {% endif %}
                              </div>
                         {% endfor %}
                      </div>

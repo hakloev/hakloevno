@@ -312,6 +312,37 @@ h3, h4 {
   display: inline-block;
 }
 
+.hn-food__meal-form {
+  padding-top: 15px;
+
+  label {
+    font-weight: 300;
+    line-height: 20px;
+    font-size: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  label:not(:first-of-type) {
+      margin-left: 10px;
+  }
+  select {
+    margin-right: 10px;
+  }
+  .hn-food__meal-inline-form {
+    margin-bottom: 20px;
+  }
+  .mdl-checkbox {
+    display: inline-block;
+    width: auto;
+  }
+}
+
+.hn-food__meal-form-error {
+  color: $cherry_pink;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
 .recipe-select2 {
   width: 35%;
 }

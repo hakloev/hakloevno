@@ -16,7 +16,7 @@ var DinnerPlan = (function ($) {
     ];
     
     var templateString="";
-    templateString += "<div id=\"item-<%= id %>\">";
+    templateString += "<div id=\"item-<%= id %>\" class=\"hn-food__meal-inline-form\">";
     templateString += "<label for=\"id_items-<%= id %>-recipe\">Recipe:<\/label>";
     templateString += "<select class=\"recipe-select2\" id=\"id_items-<%= id %>-recipe\" name=\"items-<%= id %>-recipe\">";
     templateString += "     <% _.each(recipes, function(r) { %>";
@@ -65,10 +65,10 @@ var DinnerPlan = (function ($) {
     var bindListeners = function () {
          $('.add-meal').click(function (e) {
             e.preventDefault();
-            var count = $('.meals').children().length;
+            var count = $('.hn-food__meal-form').children().length;
             var templateMarkup = templateString;
             var compiledTemplate = _.template(templateMarkup)({ id : count, recipes: recipes, days: days });
-            $('div.meals').append(compiledTemplate);
+            $('div.hn-food__meal-form').append(compiledTemplate);
             $('#id_items-TOTAL_FORMS').attr('value', count + 1);
             $('#id_items-' + count + '-recipe').select2();
             $('#id_items-' + count + '-day').select2();
