@@ -52,11 +52,11 @@ var DinnerPlan = (function ($) {
             url: '/food/meal/edit/',
             type: 'POST',
             data: data,
-            dataType: 'json',
             success: function (data) {
-                console.log(data);
+
             },
             error: function (err) {
+                console.log('[ERROR]: Eaten value could not be changed');
                 console.log(err);
             }
         });
@@ -103,5 +103,7 @@ var DinnerPlan = (function ($) {
 })(jQuery);
 
 $(document).ready(function () {
-   DinnerPlan.init();
+    if ($('#hn-food').length) {
+        DinnerPlan.init();
+    }
 });

@@ -8,7 +8,7 @@
             </div>
         </div>
     </section>
-    <section class="hn-padding-50-vertical">
+    <section class="hn-padding-50-vertical" id="hn-food">
         <div class="mdl-grid hn-container--max-width-85">
             <div class="mdl-cell mdl-cell--12-col">
                 <div class="mdl-grid">
@@ -31,9 +31,6 @@
                     </div>
                     <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
                         <div class="hn-food-stats">
-                            <div class="hn-food-stats__icon">
-                                  <i class="material-icons">attach_money</i>
-                            </div>
                             <div class="hn-food-stats__details">
                                 <div class="hn-food-stats__detail">
                                     <span class="hn-food-stats__detail-text">{{ plan.cost|floatformat:2 }} kr</span>
@@ -42,11 +39,11 @@
                                     <span class="hn-food-stats__header-text">This week</span>
                                 </div>
                             </div>
+                            <div class="hn-food-stats__icon">
+                                  <i class="material-icons">attach_money</i>
+                            </div>
                         </div>
                         <div class="hn-food-stats">
-                            <div class="hn-food-stats__icon">
-                                  <i class="material-icons">trending_up</i>
-                            </div>
                             <div class="hn-food-stats__details">
                                 <div class="hn-food-stats__detail">
                                     <span class="hn-food-stats__detail-text">{{ average_cost|floatformat:2 }} kr</span>
@@ -55,11 +52,11 @@
                                     <span class="hn-food-stats__header-text">Average cost</span>
                                 </div>
                             </div>
+                            <div class="hn-food-stats__icon">
+                                  <i class="material-icons">trending_up</i>
+                            </div>
                         </div>
                         <div class="hn-food-stats">
-                            <div class="hn-food-stats__icon">
-                                  <i class="material-icons">thumb_up</i>
-                            </div>
                             <div class="hn-food-stats__details">
                                 <div class="hn-food-stats__detail">
                                     <span class="hn-food-stats__detail-text">{{ most_eaten }}</span>
@@ -67,6 +64,9 @@
                                 <div class="hn-food-stats__header">
                                     <span class="hn-food-stats__header-text">Most eaten</span>
                                 </div>
+                            </div>
+                            <div class="hn-food-stats__icon">
+                                  <i class="material-icons">favorite</i>
                             </div>
                         </div>
                     </div>

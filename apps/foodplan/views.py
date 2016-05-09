@@ -1,5 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from django.http.response import JsonResponse
+from django.http.response import JsonResponse, HttpResponse
 from django.views import generic
 from django.db.models import Avg, Count
 from django.core.exceptions import ObjectDoesNotExist
@@ -111,6 +112,7 @@ def recipe_json(request):
     return JsonResponse([r.to_json() for r in models.Recipe.objects.all()], safe=False)
 
 
+@login_required
 def meal_edit_eaten(request):
     if request.is_ajax():
         if request.POST:
@@ -120,7 +122,7 @@ def meal_edit_eaten(request):
                 model = models.DinnerPlanItem.objects.get(pk=pk)
                 model.eaten = True if value == 1 else False
                 model.save()
-                return JsonResponse({'info': 'Object updated successfully'})
-            except ObjectDoesNotExist as e:
-                return JsonResponse({'error': 'Could not change object state'})
-    return JsonResponse({'error': 'Something went wrong'})  # Wrong message
+            except models.DinnerPlanItem.DoesNotExist as e:
+                return HttpResponse(status=412, content='Unknown DinnerPlanItem ID: %s' % pk)
+            return HttpResponse(status=200)
+    return HttpResponse(status=404)  # Wrong message

@@ -286,11 +286,12 @@ h3, h4 {
   margin-bottom: 10px;
   padding: 0 16px 16px 16px;
   height: 100%;
+  text-align: right;
 }
 
 .hn-food-stats__icon {
   display: inline-block;
-  margin-right: 10px;
+  margin-left: 10px;
   >i {
     font-size: 48px;
     line-height: 48px;
