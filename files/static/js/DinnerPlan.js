@@ -47,13 +47,23 @@ var DinnerPlan = (function ($) {
         });
     };
 
-    var bindListeners = function () {
-        addMealButton();
-
+    var changeEaten = function (data) {
+         $.ajax({
+            url: '/food/meal/edit/',
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
     };
-    
-    var addMealButton = function () {
-        $('.add-meal').click(function (e) {
+
+    var bindListeners = function () {
+         $('.add-meal').click(function (e) {
             e.preventDefault();
             var count = $('.meals').children().length;
             var templateMarkup = templateString;
@@ -68,14 +78,25 @@ var DinnerPlan = (function ($) {
                 $('.add-meal').remove();
             }
         });
+
+        $('.meal-checkbox').change(function (e) {
+            var pk = $(e.target).attr('id').split('-')[2];
+            var checked = ($(e.target).is(':checked') === true) ? 1 :0;
+            changeEaten({'value': checked, 'pk': pk});
+        });
+    };
+
+    var startSelect2 = function () {
+        $('.recipe-select2').select2();
+        $('.day-select2').select2();
     };
     
+
     return {
         init: function() {
             getRecipes();
             bindListeners();
-            $('.recipe-select2').select2();
-            $('.day-select2').select2();
+            startSelect2();
         }
     }
     

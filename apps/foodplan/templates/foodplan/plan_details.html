@@ -19,8 +19,8 @@
                                 <span class="mdl-list__item-sub-title"><a href="{{ meal.recipe.url }}" target="_blank">{{ meal.recipe.title }}</a></span>
                             </span>
                             <span class="mdl-list__item-secondary-action">
-                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-{{ meal.day }}">
-                                    <input type="checkbox" id="list-checkbox-{{ meal.day }}" class="mdl-checkbox__input" {% if meal.eaten %}checked{% endif %} />
+                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="id_meal-checkbox-{{ meal.pk }}">
+                                    <input type="checkbox" id="id_meal-checkbox-{{ meal.pk }}" class="mdl-checkbox__input meal-checkbox" {% if meal.eaten %}checked{% endif %} />
                                 </label>
                             </span>
                         </li>

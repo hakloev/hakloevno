@@ -9,7 +9,7 @@
         </div>
     </section>
     <section class="hn-padding-50-vertical">
-        <div class="mdl-grid hn-container--max-width-75 hn-container--max-width-95-phone">
+        <div class="mdl-grid hn-container--max-width-85">
             <div class="mdl-cell mdl-cell--12-col">
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
@@ -21,44 +21,61 @@
                                         <span class="mdl-list__item-sub-title"><a href="{{ meal.recipe.url }}" target="_blank">{{ meal.recipe.title }}</a></span>
                                     </span>
                                     <span class="mdl-list__item-secondary-action">
-                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-{{ meal.day }}">
-                                            <input type="checkbox" id="list-checkbox-{{ meal.day }}" class="mdl-checkbox__input" {% if meal.eaten %}checked{% endif %} />
+                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="id_meal-checkbox-{{ meal.pk }}">
+                                            <input type="checkbox" id="id_meal-checkbox-{{ meal.pk }}" class="mdl-checkbox__input meal-checkbox" {% if meal.eaten %}checked{% endif %} />
                                         </label>
                                     </span>
                                 </li>
                             {% endfor %}
                         </ul>
                     </div>
-                    <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone hn-text--right hn-text--left-phone hn-text--left-tablet">
+                    <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
                         <div class="hn-food-stats">
-                            <div class="hn-food-stats__header">
-                                <p class="hn-food-stats__header-text">Total cost this week:</p>
+                            <div class="hn-food-stats__icon">
+                                  <i class="material-icons">attach_money</i>
                             </div>
-                            <div class="hn-food-stats__detail">
-                                <h3 class="hn-food-stats__detail-text">{{ plan.cost|floatformat:2 }} kr</h3>
+                            <div class="hn-food-stats__details">
+                                <div class="hn-food-stats__detail">
+                                    <span class="hn-food-stats__detail-text">{{ plan.cost|floatformat:2 }} kr</span>
+                                </div>
+                                <div class="hn-food-stats__header">
+                                    <span class="hn-food-stats__header-text">This week</span>
+                                </div>
                             </div>
                         </div>
                         <div class="hn-food-stats">
-                            <div class="hn-food-stats__header">
-                                <p class="hn-food-stats__header-text">Average cost of all weeks:</p>
+                            <div class="hn-food-stats__icon">
+                                  <i class="material-icons">trending_up</i>
                             </div>
-                            <div class="hn-food-stats__detail">
-                                <h3 class="hn-food-stats__detail-text">{{ average_cost|floatformat:2 }} kr</h3>
+                            <div class="hn-food-stats__details">
+                                <div class="hn-food-stats__detail">
+                                    <span class="hn-food-stats__detail-text">{{ average_cost|floatformat:2 }} kr</span>
+                                </div>
+                                <div class="hn-food-stats__header">
+                                    <span class="hn-food-stats__header-text">Average cost</span>
+                                </div>
                             </div>
                         </div>
                         <div class="hn-food-stats">
-                            <div class="hn-food-stats__header">
-                                <p class="hn-food-stats__header-text">Most eaten meal:</p>
+                            <div class="hn-food-stats__icon">
+                                  <i class="material-icons">thumb_up</i>
                             </div>
-                            <div class="hn-food-stats__detail">
-                                <h3 class="hn-food-stats__detail-text">{{ most_eaten }}</h3>
+                            <div class="hn-food-stats__details">
+                                <div class="hn-food-stats__detail">
+                                    <span class="hn-food-stats__detail-text">{{ most_eaten }}</span>
+                                </div>
+                                <div class="hn-food-stats__header">
+                                    <span class="hn-food-stats__header-text">Most eaten</span>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--12-col">
                         <div>
-                            <a href="{% url 'food:plan_edit' year=plan.year week=plan.week %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                            <a href="{% url 'food:plan_edit' year=plan.year week=plan.week %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                                 Edit Current Plan
                             </a>
-                            <a href="{% url 'food:plan_create' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                            <a href="{% url 'food:plan_create' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                                 Create New Plan
                             </a>
                         </div>

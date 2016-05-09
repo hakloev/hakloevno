@@ -20,13 +20,14 @@ class DinnerPlanForm(forms.ModelForm):
         exclude = ['end_date']
         widgets = {
             'start_date': forms.TextInput(attrs={
+                'placeholder': 'Start Date: yyyy-mm-dd',
                 'class': 'mdl-textfield__input'
             }),
             'cost': forms.TextInput(attrs={
+                'placeholder': 'Cost',
                 'class': 'mdl-textfield__input'
             })
         }
-
 
 ItemFormSet = inlineformset_factory(models.DinnerPlan, models.DinnerPlanItem, form=DinnerPlanForm, extra=0,
                                     can_delete=False,

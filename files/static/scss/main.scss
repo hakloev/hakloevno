@@ -282,20 +282,33 @@ h3, h4 {
 }
 
 .hn-food-stats {
-  height: 100%;
   overflow: auto;
   margin-bottom: 10px;
   padding: 0 16px 16px 16px;
+  height: 100%;
 }
 
-.hn-food-stats__header-text {
-  font-size: 1.2em;
-  color: black;
+.hn-food-stats__icon {
+  display: inline-block;
+  margin-right: 10px;
+  >i {
+    font-size: 48px;
+    line-height: 48px;
+  }
 }
 
 .hn-food-stats__detail-text {
-  font-size: 3em;
-  margin-top: 0;
+  font-size: 2em;
+  font-weight: 300;
+  color: $orange;
+}
+
+.hn-food-stats__header-text {
+  font-weight: 300;
+}
+
+.hn-food-stats__details {
+  display: inline-block;
 }
 
 .recipe-select2 {
@@ -307,21 +320,9 @@ h3, h4 {
 }
 
 @media (max-width: 839px) and (min-width: 480px) {
-  .hn-text--left-tablet {
-      text-align: left;
-  }
-
-  .hn-container--max-width-75-tablet {
-      width: 75%;
-  }
+//  Tablet
 }
 
 @media (max-width: 479px) {
-  .hn-text--left-phone {
-      text-align: left;
-  }
-
-  .hn-container--max-width-95-phone {
-      width: 95%;
-  }
+//  Phone
 }

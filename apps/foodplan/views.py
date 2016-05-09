@@ -109,3 +109,18 @@ class DinnerPlanUpdate(DinnerPlanObjectQueryMixin, generic.UpdateView):
 
 def recipe_json(request):
     return JsonResponse([r.to_json() for r in models.Recipe.objects.all()], safe=False)
+
+
+def meal_edit_eaten(request):
+    if request.is_ajax():
+        if request.POST:
+            pk = request.POST.get('pk')
+            value = int(request.POST.get('value'))
+            try:
+                model = models.DinnerPlanItem.objects.get(pk=pk)
+                model.eaten = True if value == 1 else False
+                model.save()
+                return JsonResponse({'info': 'Object updated successfully'})
+            except ObjectDoesNotExist as e:
+                return JsonResponse({'error': 'Could not change object state'})
+    return JsonResponse({'error': 'Something went wrong'})  # Wrong message
