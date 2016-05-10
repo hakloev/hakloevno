@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-     <section class="hn-border--color-grey hn-text--centered hn-padding-85-vertical" id="hn-border">
+     <section class="hn-border--color-grey hn-text--centered" id="hn-border">
         <div class="mdl-grid">
             <div class="mdl-cell--12-col">
                 <h1>dinner plan: week {{ plan.week }}</h1>
@@ -18,62 +18,47 @@
                 {{ meal.recipe.title }}
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <a href="{{ meal.recipe.url }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect {% if meal.eaten %}mdl-button--disabled{% endif %}">Oppskrift</a>
+                <a href="{{ meal.recipe.url }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect {% if meal.eaten %}mdl-button--disabled{% endif %}">Recipe</a>
             </div>
         </div>
         {% endfor %}
         <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col">
-            <div class="mdl-card__supporting-text mdl-card--expand">
-                <h4>Cost:</h4>
-                <div id="hn-food-cost">
+            <div class="mdl-card__supporting-text mdl-card--expand" id="hn-food-stats-card">
+                <div class="hn-food-stats-card">
                     <div>
-                        <i class="material-icons hn-food-cost__icon">attach_money</i>
+                        <i class="material-icons hn-food-stats-card__icon">attach_money</i>
                     </div>
-                    <span class="hn-food-cost__text">
-                        {{ plan.cost|floatformat:2 }} kr
-                    </span>
+                    <div class="hn-food-stats-card__text">
+                        <span class="hn-food-stats-card__text-large">
+                            {{ plan.cost|floatformat:2 }} kr
+                        </span>
+                        <span class="hn-food-stats-card__text-little">cost</span>
+                    </div>
+                </div>
+                <div class="hn-food-stats-card">
+                    <div>
+                        <i class="material-icons hn-food-stats-card__icon">trending_up</i>
+                    </div>
+                    <div class="hn-food-stats-card__text">
+                        <span class="hn-food-stats-card__text-large">
+                            {{ average_cost|floatformat:2 }} kr
+                        </span>
+                        <span class="hn-food-stats-card__text-little">average cost</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="mdl-cell mdl-cell--12-col">
-            <div>
-            <a href="{% url 'food:plan_edit' year=plan.year week=plan.week %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                Edit Current Plan
-            </a>
-            <a href="{% url 'food:plan_create' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                Create New Plan
-            </a>
-            </div>
-        </div>
     </section>
-
-
-<div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-    <div class="hn-food-stats">
-        <div class="hn-food-stats__details">
-            <div class="hn-food-stats__detail">
-                <span class="hn-food-stats__detail-text">{{ average_cost|floatformat:2 }} kr</span>
-            </div>
-            <div class="hn-food-stats__header">
-                <span class="hn-food-stats__header-text">Average cost</span>
-            </div>
-        </div>
-        <div class="hn-food-stats__icon">
-              <i class="material-icons">trending_up</i>
-        </div>
+    <a href="{% url 'food:plan_create' %}" id="hn-food__add-plan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+        <i class="material-icons">add</i>
+    </a>
+    <div class="mdl-tooltip mdl-tooltip--left" for="hn-food__add-plan">
+        add new plan
     </div>
-    <div class="hn-food-stats">
-        <div class="hn-food-stats__details">
-            <div class="hn-food-stats__detail">
-                <span class="hn-food-stats__detail-text">{{ most_eaten }}</span>
-            </div>
-            <div class="hn-food-stats__header">
-                <span class="hn-food-stats__header-text">Most eaten</span>
-            </div>
-        </div>
-        <div class="hn-food-stats__icon">
-              <i class="material-icons">favorite</i>
-        </div>
+     <a href="{% url 'food:plan_create' %}" id="hn-food__edit-plan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+        <i class="material-icons">mode_edit</i>
+    </a>
+    <div class="mdl-tooltip mdl-tooltip--left" for="hn-food__edit-plan">
+        edit this plan
     </div>
-</div>
 {% endblock %}
