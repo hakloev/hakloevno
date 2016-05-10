@@ -211,7 +211,7 @@ h3, h4 {
 .hn-about-me__card > .mdl-card__title {
     height: 320px;
     color: white;
-    background: url("/static/files/hakon.jpg") center 10% / cover;
+    background: url("/static/img/hakon.jpg") center 10% / cover;
 }
 
 .hn-weather__card {
@@ -222,7 +222,7 @@ h3, h4 {
     align-items: flex-end;
     height: 256px;
     color: white;
-    background: url("/static/files/trondheim.jpg") center / cover;
+    background: url("/static/img/trondheim.jpg") center / cover;
     opacity: 0.92;
 
 }
@@ -235,7 +235,7 @@ h3, h4 {
   align-items: flex-end;
     height: 256px;
     color: white;
-    background: url("/static/files/lerkendal.jpg") center / cover;
+    background: url("/static/img/lerkendal.jpg") center / cover;
     opacity: 0.92;
 }
 
@@ -247,7 +247,7 @@ h3, h4 {
     align-items: flex-end;
     height: 256px;
     color: white;
-    background: url("/static/files/tempekirke.jpg") center / cover;
+    background: url("/static/img/tempekirke.jpg") center / cover;
     opacity: 0.92;
 }
 
@@ -358,6 +358,7 @@ h3, h4 {
 .hn-food-card {
   .mdl-card__title {
     color: $orange;
+    background-color: $light_grey;
   }
   .mdl-card__actions {
     position: absolute;
@@ -418,7 +419,7 @@ h3, h4 {
   right: 0;
   top: 0;
   margin-right: 40px;
-  margin-top: 85px;
+  margin-top: 220px;
   z-index: 1000;
 }
 
@@ -428,7 +429,7 @@ h3, h4 {
   right: 0;
   top: 0;
   margin-right: 40px;
-  margin-top: 150px;
+  margin-top: 290px;
   z-index: 1000;
 }
 
@@ -448,6 +449,9 @@ h3, h4 {
   tbody {
     td {
       height: 40px;
+      a {
+        color: $grey;
+      }
     }
   }
 }

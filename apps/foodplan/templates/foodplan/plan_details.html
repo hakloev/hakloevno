@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section class="hn-border--color-grey hn-padding-85-vertical hn-text--centered" id="hn-border">
+    <section class="hn-border--color-grey hn-padding-30-vertical hn-text--centered" id="hn-border">
         <div class="mdl-grid">
             <div class="mdl-cell--12-col">
                 <h1>dinner plan: week {{ plan.week }}</h1>
             </div>
         </div>
     </section>
-    <section class="mdl-grid hn-container--max-width-85 hn-padding-50-vertical" id="hn-food">
+     <section class="mdl-grid hn-container--max-width-85 hn-padding-50-vertical" id="hn-food">
         {% for meal in plan.items.all %}
-        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col hn-food-card">
+        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone hn-food-card">
             <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">{{ meal.get_day_display }}</h2>
             </div>
@@ -18,25 +18,35 @@
                 {{ meal.recipe.title }}
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <a href="{{ meal.recipe.url }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect {% if meal.eaten %}mdl-button--disabled{% endif %}">Oppskrift</a>
+                <a href="{{ meal.recipe.url }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect {% if meal.eaten %}mdl-button--disabled{% endif %}">Recipe</a>
             </div>
         </div>
         {% endfor %}
-        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col">
-            <div class="mdl-card__supporting-text mdl-card--expand">
-                <h4>Cost:</h4>
-                <div id="hn-food-cost">
-                    <div>
-                        <i class="material-icons hn-food-cost__icon">attach_money</i>
+        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+            <div class="mdl-card__supporting-text mdl-card--expand" id="hn-food-stats-card">
+                <div class="hn-food-stats-card">
+{#                    <div>#}
+{#                        <i class="material-icons hn-food-stats-card__icon">attach_money</i>#}
+{#                    </div>#}
+                    <div class="hn-food-stats-card__text">
+                        <span class="hn-food-stats-card__text-large">
+                            {{ plan.cost|floatformat:2 }} kr
+                        </span>
+                        <span class="hn-food-stats-card__text-little">cost</span>
                     </div>
-                    <span class="hn-food-cost__text">
-                        {{ plan.cost|floatformat:2 }} kr
-                    </span>
+                </div>
+                <div class="hn-food-stats-card">
+{#                    <div>#}
+{#                        <i class="material-icons hn-food-stats-card__icon">trending_up</i>#}
+{#                    </div>#}
+                    <div class="hn-food-stats-card__text">
+                        <span class="hn-food-stats-card__text-large">
+                            {{ average_cost|floatformat:2 }} kr
+                        </span>
+                        <span class="hn-food-stats-card__text-little">average cost</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mdl-cell mdl-cell--12-col">
-            <a href="{% url 'food:plan_edit' year=plan.year week=plan.week %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Edit Plan</a>
         </div>
     </section>
 {% endblock %}

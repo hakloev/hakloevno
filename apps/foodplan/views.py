@@ -38,20 +38,23 @@ class DinnerPlanIndex(generic.DetailView):
         # TODO: Split this...
         try:
             most_eaten = models.Recipe.objects.get(id=models.DinnerPlanItem.objects.values('recipe__id').annotate(num_recipes=Count('recipe_id')).latest('num_recipes')['recipe__id'])
-            average_cost = models.DinnerPlan.objects.filter(cost__gt=0).aggregate(Avg('cost', ))['cost__avg']
+            # average_cost = models.DinnerPlan.objects.filter(cost__gt=0).aggregate(Avg('cost', ))['cost__avg']
         except ObjectDoesNotExist as e:
             #  TODO: debug log here
             pass
-        if not average_cost:
-            average_cost = 'N/A'
         context['most_eaten'] = most_eaten
-        context['average_cost'] = average_cost
+        context['average_cost'] = self.object.cost / 7
         return context
 
 
 class DinnerPlanDetails(DinnerPlanObjectQueryMixin, generic.DetailView):
     template_name = 'foodplan/plan_details.html'
     context_object_name = 'plan'
+
+    def get_context_data(self, **kwargs):
+        context = super(DinnerPlanDetails, self).get_context_data(**kwargs)
+        context['average_cost'] = self.object.cost / 7
+        return context
 
 
 class DinnerPlanCreate(generic.CreateView):
@@ -106,6 +109,12 @@ class DinnerPlanUpdate(DinnerPlanObjectQueryMixin, generic.UpdateView):
             return redirect(self.object.get_absolute_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))
+
+
+class DinnerPlanList(generic.ListView):
+    template_name = 'foodplan/plan_list.html'
+    ordering = ['-start_date']
+    model = models.DinnerPlan
 
 
 def recipe_json(request):

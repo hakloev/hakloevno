@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+     <section class="hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-grid">
+            <div class="mdl-cell--12-col">
+                <h1>dinner plan history</h1>
+            </div>
+        </div>
+    </section>
+    <section class="mdl-grid hn-padding-50-vertical hn-container--max-width-85">
+        <div class="mdl-cell mdl-cell--12-col">
+            <table id="hn-food-table">
+                <thead>
+                    <th>Week</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </thead>
+                <tbody>
+                    {% for plan in object_list %}
+                        <tr>
+                            <td><a href="{{ plan.get_absolute_url }}">{{ plan.week }}</a></td>
+                            {% for meal in plan.items.all %}
+                                <td><a href="{{ meal.recipe.url }}">{{ meal.recipe.title }}</a></td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}

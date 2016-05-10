@@ -12,3 +12,5 @@ pip-selfcheck.json
 node_modules/*
 files/dist/*
 files/static/files/varsel.xml
+files/static/components/*
+

@@ -1,0 +1,25 @@
+{
+  "name": "hakloevno",
+  "description": "Personal webpage for hakloev",
+  "main": "",
+  "authors": [
+    "Håkon Ødegård Løvdal"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/hakloev/hakloevno",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "select2": "^4.0.2",
+    "select2-css": "^3.5.1",
+    "moment": "momentjs#^2.13.0",
+    "highlightjs": "^9.2.0",
+    "underscore": "^1.8.3"
+  }
+}
