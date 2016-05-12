@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 from datetime import datetime
-from django.core import serializers
 from . import utils
 
 
@@ -22,6 +22,11 @@ class Recipe(models.Model):
             'pk': self.pk,
             'title': self.title
         }
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Recipe, self).save()
 
     class Meta:
         verbose_name = 'Recipe'

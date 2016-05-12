@@ -41,7 +41,7 @@ class DinnerPlanIndex(generic.DetailView):
             most_eaten = models.Recipe.objects.get(id=models.DinnerPlanItem.objects.values('recipe__id').annotate(num_recipes=Count('recipe_id')).latest('num_recipes')['recipe__id'])
             # average_cost = models.DinnerPlan.objects.filter(cost__gt=0).aggregate(Avg('cost', ))['cost__avg']
         except ObjectDoesNotExist as e:
-            #  TODO: debug log here
+            #  TODO: Debug log here
             pass
         context['most_eaten'] = most_eaten
         context['average_cost'] = self.object.cost / 7
@@ -58,7 +58,7 @@ class DinnerPlanDetails(LoginRequiredMixin, DinnerPlanObjectQueryMixin, generic.
         return context
 
 
-class DinnerPlanCreate(generic.CreateView):
+class DinnerPlanCreate(LoginRequiredMixin, generic.CreateView):
     template_name = 'foodplan/create_plan.html'
     form_class = forms.DinnerPlanForm
 
@@ -82,7 +82,7 @@ class DinnerPlanCreate(generic.CreateView):
             return self.render_to_response(self.get_context_data(form=form))
 
 
-class DinnerPlanUpdate(DinnerPlanObjectQueryMixin, generic.UpdateView):
+class DinnerPlanUpdate(LoginRequiredMixin, DinnerPlanObjectQueryMixin, generic.UpdateView):
     template_name = 'foodplan/create_plan.html'
     form_class = forms.DinnerPlanForm
     context_object_name = 'plan'
@@ -112,23 +112,26 @@ class DinnerPlanUpdate(DinnerPlanObjectQueryMixin, generic.UpdateView):
             return self.render_to_response(self.get_context_data(form=form))
 
 
-class DinnerPlanList(generic.ListView):
+class DinnerPlanList(LoginRequiredMixin, generic.ListView):
     template_name = 'foodplan/plan_list.html'
     ordering = ['-start_date']
     model = models.DinnerPlan
 
 
-class RecipeCreate(generic.CreateView):
-    model = models.Recipe
+class RecipeCreate(LoginRequiredMixin, generic.CreateView):
+    form_class = forms.RecipeForm
     template_name = 'foodplan/create_recipe.html'
-    fields = ['title', 'url']
+    # TODO: Need to add view for single recipes to avoid NoReverseMatch when creating from /food/recipe/add/
 
 
-class RecipeUpdate(generic.UpdateView):
-    model = models.Recipe
+class RecipeUpdate(LoginRequiredMixin, generic.UpdateView):
+    form_class = forms.RecipeForm
     template_name = 'foodplan/create_recipe.html'
     context_object_name = 'recipe'
 
+
+# TODO: Check for returning Unauthorized here instead of redirect
+@login_required
 def recipe_json(request):
     return JsonResponse([r.to_json() for r in models.Recipe.objects.all()], safe=False)
 

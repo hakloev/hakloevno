@@ -12,7 +12,7 @@ class DinnerPlanItemInline(admin.TabularInline):
 
 
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url')
+    list_display = ('title', 'url', 'slug')
     prepopulated_fields = {'slug': ('title', )}
 
 

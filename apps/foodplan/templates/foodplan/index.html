@@ -49,6 +49,7 @@
             </div>
         </div>
     </section>
+    {% if user.is_authenticated %}
     <a href="{% url 'food:plan_create' %}" id="hn-food__add-plan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
         <i class="material-icons">add</i>
     </a>
@@ -61,4 +62,5 @@
     <div class="mdl-tooltip mdl-tooltip--left" for="hn-food__edit-plan">
         edit this plan
     </div>
+    {% endif %}
 {% endblock %}

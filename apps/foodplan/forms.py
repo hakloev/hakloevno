@@ -3,31 +3,34 @@ from django.forms.models import inlineformset_factory
 from . import models
 
 
-class DateInput(forms.DateInput):
+class MDLTextFieldInput(forms.TextInput):
     """
-    Overrides default date input to ensure type="date"
+    Overrides default TextInput to ensure that attribute
+    'class' always is mdl textfield input
     """
-    input_type = 'date'
+    def __init__(self, *args, **kwargs):
+        attrs = kwargs.get('attrs', dict())
+        attrs.update({
+            'class': 'mdl-textfield__input'
+        })
+        super(MDLTextFieldInput, self).__init__(attrs=attrs)
 
 
 class DinnerPlanForm(forms.ModelForm):
     """
     Form for DinnerPlan Create/Update
     """
-
     class Meta:
         model = models.DinnerPlan
         exclude = ['end_date']
         widgets = {
-            'start_date': forms.TextInput(attrs={
-                'placeholder': 'yyyy-mm-dd',
-                'class': 'mdl-textfield__input'
+            'start_date': MDLTextFieldInput(attrs={
+                'placeholder': 'yyyy-mm-dd'
             }),
-            'cost': forms.TextInput(attrs={
-                'class': 'mdl-textfield__input'
-            })
+            'cost': MDLTextFieldInput()
         }
 
+# Form for DinnerPlan that includes DinnerPlanItems inline
 ItemFormSet = inlineformset_factory(models.DinnerPlan, models.DinnerPlanItem, form=DinnerPlanForm, extra=0,
                                     can_delete=False,
                                     widgets={
@@ -36,3 +39,15 @@ ItemFormSet = inlineformset_factory(models.DinnerPlan, models.DinnerPlanItem, fo
                                         'eaten': forms.CheckboxInput(attrs={'class': 'mdl-checkbox__input'})
                                     })
 
+
+class RecipeForm(forms.ModelForm):
+    """
+    Form for Recipe Create/Update
+    """
+    class Meta:
+        model = models.Recipe
+        fields = ['title', 'url']
+        widgets = {
+            'title': MDLTextFieldInput(),
+            'url': MDLTextFieldInput()
+        }
