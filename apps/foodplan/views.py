@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.http.response import JsonResponse, HttpResponse
 from django.views import generic
@@ -47,7 +48,7 @@ class DinnerPlanIndex(generic.DetailView):
         return context
 
 
-class DinnerPlanDetails(DinnerPlanObjectQueryMixin, generic.DetailView):
+class DinnerPlanDetails(LoginRequiredMixin, DinnerPlanObjectQueryMixin, generic.DetailView):
     template_name = 'foodplan/plan_details.html'
     context_object_name = 'plan'
 
@@ -116,6 +117,17 @@ class DinnerPlanList(generic.ListView):
     ordering = ['-start_date']
     model = models.DinnerPlan
 
+
+class RecipeCreate(generic.CreateView):
+    model = models.Recipe
+    template_name = 'foodplan/create_recipe.html'
+    fields = ['title', 'url']
+
+
+class RecipeUpdate(generic.UpdateView):
+    model = models.Recipe
+    template_name = 'foodplan/create_recipe.html'
+    context_object_name = 'recipe'
 
 def recipe_json(request):
     return JsonResponse([r.to_json() for r in models.Recipe.objects.all()], safe=False)

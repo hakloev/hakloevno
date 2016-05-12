@@ -100,6 +100,8 @@ ADMINS = (
     ('Håkon Ødegård Løvdal', 'me@hakloev.no'),
 )
 
+LOGIN_URL = '/auth/login/'
+
 # Application definition
 
 INSTALLED_APPS = [

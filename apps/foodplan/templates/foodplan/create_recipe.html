@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+     <section class="hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-grid">
+            <div class="mdl-cell--12-col">
+                {% if recipe %}
+                    <h1>edit recipe</h1>
+                {% else %}
+                    <h1>create recipe</h1>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <section class="hn-padding-50-vertical" id="hn-food">
+        <div class="mdl-grid hn-container--max-width-85">
+            <div class="mdl-cell--12-col">
+                 <form method="POST">
+                 {% csrf_token %}
+                        {{ form }}
+                        {% if recipe %}
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Update Recipe</button>
+                        {% else %}
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create Recipe</button>
+                        {% endif %}
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

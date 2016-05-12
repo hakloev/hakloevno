@@ -24,7 +24,7 @@
                         <label class="mdl-textfield__label" for="password">Password</label>
                     </div>
                 </div>
-                <input type="hidden" name="next" value="/">
+                <input type="hidden" name="next" value="{{ next }}">
                 {% csrf_token %}
                 <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-color--orange">Log in</button>
             </form>

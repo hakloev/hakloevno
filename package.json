@@ -17,14 +17,23 @@
   },
   "homepage": "https://github.com/hakloev/hakloevno#readme",
   "devDependencies": {
-    "browserify": "^13.0.0",
+    "browserify": "^13.0.1",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-clean-css": "^2.0.6",
     "gulp-concat": "^2.6.0",
     "gulp-livereload": "^3.8.1",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.1",
+    "gulp-sass": {
+        "version": "2.3.1",
+        "from": "gulp-sass@2.3.1",
+        "dependencies": {
+            "node-sass": {
+                "version": "3.7.0",
+                "from": "node-sass@^3.6.0"
+            }
+        }
+    },
     "gulp-uglify": "^1.5.3",
     "gulp-watch": "^4.3.5"
   }

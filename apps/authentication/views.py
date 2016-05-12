@@ -1,5 +1,6 @@
 import logging
 from django.shortcuts import render
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.contrib import messages
@@ -10,7 +11,7 @@ log = logging.getLogger(__name__)
 
 @sensitive_post_parameters('password')
 def login_override(request):
-    redirect_url = request.GET.get('next', '')
+    redirect_url = request.POST.get('next', request.GET.get('next', ''))
     if request.method == 'POST':
         username, password = request.POST['username'], request.POST['password']
         user = authenticate(username=username, password=password)
@@ -30,7 +31,9 @@ def login_override(request):
     else:
         # Some redirect to previous page here
         pass
-    return render(request, 'authentication/login.html', {'request': request})
+
+    context = {'next': redirect_url}
+    return render(request, 'authentication/login.html', context)
 
 
 def logout_override(request):
