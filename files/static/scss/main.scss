@@ -1,6 +1,8 @@
 @import "colors";
 @import "overrides";
 
+/* ---------------------------------------------------- */
+
 // Defaults
 p {
   vertical-align: middle;
@@ -27,6 +29,8 @@ h1, h2 {
 h3, h4, h5, h6 {
   font-weight: 100;
 }
+
+/* ---------------------------------------------------- */
 
 // General modifiers
 .hn-container--width-85 {
@@ -76,6 +80,16 @@ h3, h4, h5, h6 {
   font-style: italic;
 }
 
+/* ---------------------------------------------------- */
+
+// Navbar
+.hn-header__lock {
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* ---------------------------------------------------- */
+
 // Authentication / Login
 #hn-login {
   margin: 0 auto;
@@ -87,6 +101,8 @@ h3, h4, h5, h6 {
 .hn-login__title {
   margin-top: 0;
 }
+
+/* ---------------------------------------------------- */
 
 // About Me
 .hn-about-me__text {
@@ -103,6 +119,8 @@ h3, h4, h5, h6 {
     background: url("/static/img/hakon.jpg") center 10% / cover;
 }
 
+/* ---------------------------------------------------- */
+
 // Weather Cards
 .hn-weather__card {
     width: 100%;
@@ -115,6 +133,8 @@ h3, h4, h5, h6 {
     background: url("/static/img/trondheim.jpg") center / cover;
     opacity: 0.92;
 }
+
+/* ---------------------------------------------------- */
 
 // Borders
 .hn-border--color-grey {
@@ -138,6 +158,8 @@ h3, h4, h5, h6 {
     color: $grey;
   }
 }
+
+/* ---------------------------------------------------- */
 
 // Blog
 #hn-blog-posts {
@@ -198,11 +220,15 @@ h3, h4, h5, h6 {
   color: white;
 }
 
-.hn-header__lock {
-  line-height: 1;
-  vertical-align: middle;
-}
 
+
+
+
+
+
+/* ---------------------------------------------------- */
+
+// TODO: CLEAN CSS AND TEMPLATES FOR FOOD
 // Food
 #hn-food-list {
   width: 100%;
@@ -308,10 +334,6 @@ h3, h4, h5, h6 {
   }
 }
 
-//.hn-food-cost:not(:first-of-type) {
-//  margin-top: 15px;
-//}
-
 .hn-food-stats-card__icon {
   font-size: 48px;
   line-height: 48px;
@@ -381,11 +403,13 @@ h3, h4, h5, h6 {
   }
 }
 
+/* ---------------------------------------------------- */
 
-@media (max-width: 839px) and (min-width: 480px) {
+// Media Queries
 //  Tablet
+@media (max-width: 839px) and (min-width: 480px) {
 }
 
-@media (max-width: 479px) {
 //  Phone
+@media (max-width: 479px) {
 }
