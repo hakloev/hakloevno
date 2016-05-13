@@ -1,38 +1,7 @@
-// Gamebookers palette
+@import "colors";
+@import "overrides";
 
-$grey: #424242;
-$weathered_wing: #E9E9E9;
-$orange: #FF9900;
-$light_grey: lighten(#BCBCBC, 16);
-$apple: #C7F464;
-$cherry_pink: #FF6B6B;
-
-.mdl-layout__header {
-  background-color: $grey;
-}
-
-.mdl-mini-footer {
-  background-color: $grey;
-}
-
-.mdl-layout__header-row > .mdl-layout-title > a {
-    color: white;
-    text-decoration: none;
-}
-
-.mdl-navigation__link:hover {
-    background-color: lighten($grey, 5);
-}
-
-.mdl-layout__drawer .mdl-navigation .mdl-navigation__link--current {
-  background-color: #e0e0e0;
-  color: #757575;
-}
-
-.mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
-  background-color: #e0e0e0;
-}
-
+// Defaults
 p {
   vertical-align: middle;
   font-size: 1.1em;
@@ -43,69 +12,40 @@ p {
 a {
   text-decoration: none;
   color: $orange;
+  font-weight: 300;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: $orange;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 h1, h2 {
   font-weight: 300;
 }
 
-h3, h4 {
-  font-weight: 200;
-  a {
-    font-weight: 200;
-    color: lighten($orange, 10);
-  }
+h3, h4, h5, h6 {
+  font-weight: 100;
 }
 
-#hn-login {
-  margin: 0 auto;
-  padding: 50px 0;
-  max-width: 310px;
-  width: 100%;
-}
-
-.hn-login__title {
-  margin-top: 0;
-}
-
-.hn-border--color-grey {
-  background-color: $light_grey;
-}
-
-.hn-border--color-black {
-  background-color: $grey;
-}
-
-.hn-border--color-error {
-  background-color: $cherry_pink;
-  h5 {
-    color: white;
-  }
-}
-
-.hn-border--color-success {
-  background-color: $apple;
-  h5 {
-    color: $grey;
-  }
-}
-
-#hn-blog-posts {
-    background-color: lighten($weathered_wing, 6);
-}
-
-.hn-container--max-width-85 {
+// General modifiers
+.hn-container--width-85 {
     width: 85%;
     max-width: 1200px;
 }
 
-.hn-container--max-width-75 {
+.hn-container--width-75 {
     width: 75%;
     max-width: 768px;
+}
+
+.hn-margin-none-tb {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.hn-margin-15-tb {
+  margin: 15px 0;
 }
 
 .hn-padding-30-vertical {
@@ -132,49 +72,91 @@ h3, h4 {
     text-align: right;
 }
 
-.hn-about-me__text {
-  font-size: 1.3em;
-  font-weight: 100;
-}
-
-.hn-text-color--orange {
-    color: $orange;
-}
-
-.hn-blog-post {
-    width: 100%;
-}
-
-.hn-title h3 {
-  font-size: 3em;
-}
-
 .hn-text--italic {
   font-style: italic;
 }
 
-.hn--margin-none-tb {
-  margin-top: 0;
-  margin-bottom: 0;
+// About Me
+.hn-about-me__text {
+  font-size: 1.3em;
 }
 
-.hn--margin-15-tb {
-  margin: 15px 0;
+#hn-about-me__card {
+  width: 100%;
 }
 
-.hn-blog-post__title {
-  h3 {
-    font-size: 2em;
+#hn-about-me__card > .mdl-card__title {
+    height: 320px;
+    color: white;
+    background: url("/static/img/hakon.jpg") center 10% / cover;
+}
+
+// Weather Cards
+.hn-weather__card {
+    width: 100%;
+}
+
+.hn-weather__card > .mdl-card__title {
+    align-items: flex-end;
+    height: 256px;
+    color: white;
+    background: url("/static/img/trondheim.jpg") center / cover;
+    opacity: 0.92;
+}
+
+// Borders
+.hn-border--color-grey {
+  background-color: $light_grey;
+}
+
+.hn-border--color-black {
+  background-color: $grey;
+}
+
+.hn-border--color-error {
+  background-color: $cherry_pink;
+  h5 {
+    color: white;
   }
 }
 
-.hn-blog-post__ingress p {
-  margin: 10px 0;
+.hn-border--color-success {
+  background-color: $apple;
+  h5 {
+    color: $grey;
+  }
+}
+
+// Blog
+#hn-blog-posts {
+  background-color: lighten($weathered_wing, 6);
+}
+
+.hn-blog-post {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.hn-blog-post__title {
+  .hn-blog-post__title-text {
+    margin: 0;
+  }
+  h3.hn-blog-post__title-text {
+    font-size: 2.5em;
+  }
 }
 
 .hn-blog-post__meta {
   font-size: 0.9em;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
+
+.hn-blog-post__ingress {
+  margin-top: 20px;
+  font-style: italic;
+}
+
 
 .hn-blog-post__meta--text {
 
@@ -184,10 +166,6 @@ h3, h4 {
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
   }
-}
-
-.hn-blog-post--padding-20-ltr {
-  padding: 20px 20px 10px 0;
 }
 
 .hn-blog-post--color-white {
@@ -202,53 +180,6 @@ h3, h4 {
 .hn-blog-post > .mdl-card__title a {
     color: white;
     text-decoration: none;
-}
-
-.hn-about-me__card {
-  width: 100%;
-}
-
-.hn-about-me__card > .mdl-card__title {
-    height: 320px;
-    color: white;
-    background: url("/static/img/hakon.jpg") center 10% / cover;
-}
-
-.hn-weather__card {
-    width: 100%;
-}
-
-.hn-weather__card > .mdl-card__title {
-    align-items: flex-end;
-    height: 256px;
-    color: white;
-    background: url("/static/img/trondheim.jpg") center / cover;
-    opacity: 0.92;
-
-}
-
-.hn-bus-card__lerkendal {
-  width: 100%;
-}
-
-.hn-bus-card__lerkendal > .mdl-card__title {
-  align-items: flex-end;
-    height: 256px;
-    color: white;
-    background: url("/static/img/lerkendal.jpg") center / cover;
-    opacity: 0.92;
-}
-
-.hn-bus-card__tempe {
-  width: 100%;
-}
-
-.hn-bus-card__tempe > .mdl-card__title {
-    align-items: flex-end;
-    height: 256px;
-    color: white;
-    background: url("/static/img/tempekirke.jpg") center / cover;
-    opacity: 0.92;
 }
 
 .hn-tag {
@@ -273,6 +204,28 @@ h3, h4 {
   background: $orange;
   color: white;
 }
+
+// Testing
+#hn-login {
+  margin: 0 auto;
+  padding: 50px 0;
+  max-width: 310px;
+  width: 100%;
+}
+
+.hn-login__title {
+  margin-top: 0;
+}
+
+.hn-text-color--orange {
+    color: $orange;
+}
+
+
+.hn-title h3 {
+  font-size: 3em;
+}
+
 
 .hn-header__lock {
   line-height: 1;

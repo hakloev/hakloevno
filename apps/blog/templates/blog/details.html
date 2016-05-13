@@ -7,30 +7,29 @@
 {% endblock %}
 
 {% block content %}
-     <section class="hn-border--color-grey hn-text--centered" id="hn-border">
-        <div class="mdl-grid">
-            <div class="mdl-cell--12-col">
-                <h1>{{ object }}</h1>
-            </div>
+    <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-cell--12-col">
+            <h1>{{ object }}</h1>
         </div>
     </section>
-    <section class="hn-padding-30-vertical">
-        <div class="mdl-grid hn-container--max-width-85">
-            <div class="mdl-cell mdl-cell--12-col">
-                {% for tag in object.tags.all %}
-                    <a href="{% url 'blog:tag_details' tag=tag.slug %}" class="hn-tag mdl-button--raised hn-tag--color-orange">{{ tag }}</a>
-                {% endfor %}
+    <section class="mdl-grid hn-padding-50-vertical hn-container--width-85">
+        <div class="mdl-cell mdl-cell--12-col">
+            {% for tag in object.tags.all %}
+                <a href="{% url 'blog:tag_details' tag=tag.slug %}" class="hn-tag mdl-button--raised hn-tag--color-orange">{{ tag }}</a>
+            {% endfor %}
+        </div>
+        <div class="mdl-cell mdl-cell--12-col hn-blog-post">
+            <div class="hn-blog-post__meta">
+                <span class="hn-blog-post__meta--text"><i>Written on {{ object.created | date:"d. M Y H:i" }}</i></span>
             </div>
-            <hr>
-            <div class="mdl-cell mdl-cell--12-col hn-blog-post__ingress">
-                <p class="hn-text--italic">{{ object.ingress }}</p>
+            <div class="hn-blog-post__ingress">
+                <p>{{ object.ingress }}</p>
             </div>
-            <div class="mdl-cell mdl-cell--12-col hn-blog-post__content">
+            <div class="hn-blog-post__content">
                 {{ object.body | markdown }}
             </div>
         </div>
     </section>
-
 {% endblock %}
 
 {% block footer_js %}
