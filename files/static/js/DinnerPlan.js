@@ -14,23 +14,29 @@ var DinnerPlan = (function ($) {
         {id: 5, title: 'Saturday'},
         {id: 6, title: 'Sunday'}
     ];
-    
-    var templateString="";
-    templateString += "<tr id=\"item-<%= id %>\">";
-    templateString += "<input id=\"id_items-<%= id %>-plan\" name=\"items-<%= id %>-plan\" type=\"hidden\"><input id=\"id_items-<%= id %>-id\" name=\"items-<%= id %>-id\" type=\"hidden\">";
-    templateString += "<td><select class=\"recipe-select2\" id=\"id_items-<%= id %>-recipe\" name=\"items-<%= id %>-recipe\">";
-    templateString += "     <% _.each(recipes, function(r) { %>";
-    templateString += "     <option value=\"<%= r.pk %>\"><%= r.title %><\/option>";
-    templateString += "     <% }); %>";
-    templateString += "<\/select><\/td>";
-    templateString += "<td><select class=\"day-select2\" id=\"id_items-<%= id %>-day\" name=\"items-<%= id %>-day\">";
-    templateString += "     <% _.each(days, function(d) { %>";
-    templateString += "     <option value=\"<%= d.id %>\"><%= d.title %><\/option>";
-    templateString += "     <% }); %>";
-    templateString += "<\/select><\/td>";
-    templateString += "<td><label class=\"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect\" for=\"id_items-<%= id %>-eaten\"><input class=\"mdl-checkbox__input\" id=\"id_items-<%= id %>-eaten\" name=\"items-<%= id %>-eaten\" type=\"checkbox\"><\/label><\/td>";
-    templateString += "<\/tr>";
-    
+
+    var addMealTemplate = [
+        '<tr id="item-<%= id %>">',
+        '<input id="id_items-<%= id %>-plan" name="items-<%= id %>-plan" type="hidden"><input id="id_items-<%= id %>-id" name="items-<%= id %>-id" type="hidden">',
+        '<input id="id_items-<%= id %>-plan" name="items-<%= id %>-plan" type="hidden"><input id="id_items-<%= id %>-id" name="items-<%= id %>-id" type="hidden">',
+        '<td><select class="recipe-select2" id="id_items-<%= id %>-recipe" name="items-<%= id %>-recipe">',
+        '<% _.each(recipes, function(r) { %>',
+        '<option value="<%= r.pk %>"><%= r.title %></option>',
+        '<% }); %>',
+        '</select></td>',
+        '<td><select class="day-select2" id="id_items-<%= id %>-day" name="items-<%= id %>-day">',
+        '<% _.each(days, function(d) { %>',
+        '<option value="<%= d.id %>"><%= d.title %></option>',
+        '<% }); %>',
+        '</select></td>',
+        '<td><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="id_items-<%= id %>-eaten"><input class="mdl-checkbox__input" id="id_items-<%= id %>-eaten" name="items-<%= id %>-eaten" type="checkbox"></label></td>',
+        '<\/tr>'
+    ].join('');
+
+    var addRecipeTemplate = [
+        
+    ].join('');
+
     var getRecipes = function () {
         $.ajax({
             url: '/food/recipe/all/',
@@ -64,7 +70,7 @@ var DinnerPlan = (function ($) {
          $('.add-meal').click(function (e) {
             e.preventDefault();
             var count = $('.hn-food-table__body').children().length;
-            var templateMarkup = templateString;
+            var templateMarkup = addMealTemplate;
             var compiledTemplate = _.template(templateMarkup)({ id : count, recipes: recipes, days: days });
             $('tbody.hn-food-table__body').append(compiledTemplate);
             $('#id_items-TOTAL_FORMS').attr('value', count + 1);
@@ -88,7 +94,6 @@ var DinnerPlan = (function ($) {
         $('.recipe-select2').select2();
         $('.day-select2').select2();
     };
-    
 
     return {
         init: function() {

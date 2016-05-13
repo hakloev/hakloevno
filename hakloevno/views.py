@@ -10,6 +10,9 @@ def home_files(request, file_name):
 
 
 def index(request):
+    """
+    Index view for '/'-route
+    """
     blog_entries = BlogEntry.objects.published()[:5]
     return render(request, template_name='index.html', context={
         'blog_entries': blog_entries

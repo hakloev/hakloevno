@@ -126,9 +126,6 @@ class RecipeCreate(LoginRequiredMixin, generic.FormView):
     template_name = 'foodplan/create_recipe.html'
     # TODO: Need to add view for single recipes to avoid NoReverseMatch when creating from /food/recipe/add/
 
-    def get_form(self, form_class=None):
-        return forms.RecipeFormSet(queryset=models.Recipe.objects.none())
-
 
 class RecipeUpdate(LoginRequiredMixin, generic.UpdateView):
     form_class = forms.RecipeForm
