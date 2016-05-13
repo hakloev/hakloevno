@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section class="hn-border--color-grey hn-text--centered" id="hn-border">
-        <div class="mdl-grid">
-            <div class="mdl-cell--12-col">
-                <h1>login</h1>
-            </div>
+    <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-cell--12-col">
+            <h1>login</h1>
         </div>
     </section>
     <section class="mdl-grid" id="hn-login">
         <div class="mdl-cell mdl-cell--12-col mdl-cell--middle">
-            <h3 class="hn-login__title">Enter credentials:</h3>
+            <h3 class="hn-login__title">enter credentials:</h3>
             <form method="POST" action="{% url 'auth:login' %}">
                 <div>
                     <div class="mdl-textfield mdl-js-textfield">
