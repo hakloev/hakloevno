@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section class="hn-border--color-grey hn-padding-30-vertical hn-text--centered" id="hn-border">
-        <div class="mdl-grid">
-            <div class="mdl-cell--12-col">
-                <h1>dinner plan: week {{ plan.week }}</h1>
-            </div>
+    <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-cell mdl-cell--12-col">
+            <h1>dinner plan: week {{ plan.week }}</h1>
         </div>
     </section>
-     <section class="mdl-grid hn-container--max-width-85 hn-padding-85-vertical" id="hn-food">
+     <section class="mdl-grid hn-container--width-85 hn-padding-85-vertical" id="hn-food">
         {% for meal in plan.items.all %}
         <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone hn-food-card">
             <div class="mdl-card__title">

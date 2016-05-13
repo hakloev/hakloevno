@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-     <section class="hn-border--color-grey hn-text--centered" id="hn-border">
-        <div class="mdl-grid">
-            <div class="mdl-cell--12-col">
-                {% if recipe %}
-                    <h1>edit recipe</h1>
-                {% else %}
-                    <h1>create recipe</h1>
-                {% endif %}
-            </div>
+     <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-cell mdl-cell--12-col">
+            {% if recipe %}
+                <h1>edit recipe</h1>
+            {% else %}
+                <h1>create recipe</h1>
+            {% endif %}
         </div>
     </section>
     <section class="hn-padding-50-vertical" id="hn-food">
-        <div class="mdl-grid hn-container--max-width-85">
+        <div class="mdl-grid hn-container--width-85">
             <div class="mdl-cell--12-col">
                 {{ form.empty_form }}
 

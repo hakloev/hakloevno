@@ -64,6 +64,10 @@ h3, h4, h5, h6 {
     padding: 85px 0 85px 0;
 }
 
+.hn-padding-85-bottom {
+  padding-bottom: 85px;
+}
+
 .hn-text--centered {
     text-align: center;
 }
@@ -309,11 +313,11 @@ h3, h4, h5, h6 {
 .hn-food-card {
   .mdl-card__title {
     color: $orange;
-    background-color: $light_grey;
   }
   .mdl-card__actions {
     position: absolute;
     bottom: 0;
+    background-color: $light_grey;
   }
 }
 

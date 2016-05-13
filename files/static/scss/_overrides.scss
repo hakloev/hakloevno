@@ -21,6 +21,10 @@
   color: #757575;
 }
 
+.mdl-layout__header-row .mdl-navigation .mdl-navigation__link--current {
+  background-color: lighten($grey, 5);
+}
+
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
   background-color: #e0e0e0;
 }

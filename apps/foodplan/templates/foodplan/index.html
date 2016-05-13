@@ -2,11 +2,20 @@
 
 {% block content %}
      <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
-        <div class="mdl-cell--12-col">
+        <div class="mdl-cell mdl-cell--12-col">
             <h1>dinner plan: week {{ plan.week }}</h1>
         </div>
     </section>
-    <section class="mdl-grid hn-container--width-85 hn-padding-85-vertical" id="hn-food">
+    <section class="mdl-grid hn-container--width-85 hn-padding-30-vertical">
+        <div class="mdl-cell mdl-cell--12-col">
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{% url 'food:plan_create' %}">Create</a>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{% url 'food:plan_edit' year=plan.year week=plan.week %}">Edit</a>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{% url 'food:plan_history' %}">History</a>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{% url 'food:recipe_create' %}">Add Recipe</a>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Statistics</a>
+        </div>
+    </section>
+    <section class="mdl-grid hn-container--width-85 hn-padding-85-bottom" id="hn-food">
         {% for meal in plan.items.all %}
         <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone hn-food-card">
             <div class="mdl-card__title">
@@ -47,18 +56,18 @@
             </div>
         </div>
     </section>
-    {% if user.is_authenticated %}
-    <a href="{% url 'food:plan_create' %}" id="hn-food__add-plan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-        <i class="material-icons">add</i>
-    </a>
-    <div class="mdl-tooltip mdl-tooltip--left" for="hn-food__add-plan">
-        add new plan
-    </div>
-     <a href="{% url 'food:plan_create' %}" id="hn-food__edit-plan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-        <i class="material-icons">mode_edit</i>
-    </a>
-    <div class="mdl-tooltip mdl-tooltip--left" for="hn-food__edit-plan">
-        edit this plan
-    </div>
-    {% endif %}
+{#    {% if user.is_authenticated %}#}
+{#    <a href="{% url 'food:plan_create' %}" id="hn-food__add-plan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">#}
+{#        <i class="material-icons">add</i>#}
+{#    </a>#}
+{#    <div class="mdl-tooltip mdl-tooltip--left" for="hn-food__add-plan">#}
+{#        add new plan#}
+{#    </div>#}
+{#     <a href="{% url 'food:plan_create' %}" id="hn-food__edit-plan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">#}
+{#        <i class="material-icons">mode_edit</i>#}
+{#    </a>#}
+{#    <div class="mdl-tooltip mdl-tooltip--left" for="hn-food__edit-plan">#}
+{#        edit this plan#}
+{#    </div>#}
+{#    {% endif %}#}
 {% endblock %}
