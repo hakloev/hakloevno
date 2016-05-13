@@ -32,15 +32,16 @@
             <main class="mdl-layout__content">
                 {% block message_block %}
                     {% if messages %}
+                        <section id="hn-alerts">
                         {% for message in messages %}
-                            <section class="hn-alert hn-border--color-{{ message.tags }} hn-text--centered" id="hn-border">
-                                <div class="mdl-grid">
-                                    <div class="mdl-cell--12-col">
-                                        <h5>{{ message }}</h5>
-                                    </div>
-                                </div>
-                            </section>
+                            <div class="hn-alert hn-border--color-{{ message.tags }}">
+                                <a class="hn-alert__close">
+                                    <i class="material-icons">close</i>
+                                </a>
+                                <h4 class="hn-alert__message">{{ message }}</h4>
+                            </div>
                         {% endfor %}
+                        </section>
                     {% endif %}
                 {% endblock %}
                 {% block content %}

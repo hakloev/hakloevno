@@ -140,7 +140,27 @@ h3, h4, h5, h6 {
 
 /* ---------------------------------------------------- */
 
-// Borders
+// Borders and Alerts
+#hn-alert { }
+.hn-alert {
+  height: 30px;
+  line-height: 30px;
+  padding: 20px 10px;
+}
+.hn-alert__close {
+  float: right;
+  cursor: pointer;
+  i {
+    vertical-align: middle;
+    line-height: 1px;
+  }
+}
+
+.hn-alert__message {
+  text-align: center;
+  margin: 0;
+}
+
 .hn-border--color-grey {
   background-color: $light_grey;
 }
@@ -151,14 +171,14 @@ h3, h4, h5, h6 {
 
 .hn-border--color-error {
   background-color: $cherry_pink;
-  h5 {
+  h4, i {
     color: white;
   }
 }
 
 .hn-border--color-success {
   background-color: $apple;
-  h5 {
+  h4, i {
     color: $grey;
   }
 }
