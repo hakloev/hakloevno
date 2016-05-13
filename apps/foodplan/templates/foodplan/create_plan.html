@@ -53,9 +53,9 @@
                                         </td>
                                     {% endfor %}
                                     </tr>
-{#                                    {% if meal_form.non_field_errors %}#}
-{#                                         <p class="hn-food__meal-form-error">{{ meal_form.non_field_errors.as_text }}</p>#}
-{#                                     {% endif %}#}
+                                    {% if meal_form.non_field_errors %}
+                                         <p class="hn-food__meal-form-error">{{ meal_form.non_field_errors.as_text }}</p>
+                                    {% endif %}
                                 {% endfor %}
                             </tbody>
                         </table>

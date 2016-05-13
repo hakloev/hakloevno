@@ -1,5 +1,6 @@
 from django import forms
-from django.forms.models import inlineformset_factory
+from django.core.exceptions import NON_FIELD_ERRORS
+from django.forms.models import inlineformset_factory, modelformset_factory
 from . import models
 
 
@@ -9,11 +10,12 @@ class MDLTextFieldInput(forms.TextInput):
     'class' always is mdl textfield input
     """
     def __init__(self, *args, **kwargs):
-        attrs = kwargs.get('attrs', dict())
-        attrs.update({
+        new_attrs = kwargs.get('attrs', dict())
+        new_attrs.update({
             'class': 'mdl-textfield__input'
         })
-        super(MDLTextFieldInput, self).__init__(attrs=attrs)
+        kwargs['attrs'] = new_attrs
+        super(MDLTextFieldInput, self).__init__(*args, **kwargs)
 
 
 class DinnerPlanForm(forms.ModelForm):
@@ -29,15 +31,11 @@ class DinnerPlanForm(forms.ModelForm):
             }),
             'cost': MDLTextFieldInput()
         }
-
-# Form for DinnerPlan that includes DinnerPlanItems inline
-ItemFormSet = inlineformset_factory(models.DinnerPlan, models.DinnerPlanItem, form=DinnerPlanForm, extra=0,
-                                    can_delete=False,
-                                    widgets={
-                                        'recipe': forms.Select(attrs={'class': 'recipe-select2'}),
-                                        'day': forms.Select(attrs={'class': 'day-select2'}),
-                                        'eaten': forms.CheckboxInput(attrs={'class': 'mdl-checkbox__input'})
-                                    })
+        error_messages = {
+            NON_FIELD_ERRORS: {
+                'unique_together': "Meal is already planned for this day",
+            }
+        }
 
 
 class RecipeForm(forms.ModelForm):
@@ -51,3 +49,16 @@ class RecipeForm(forms.ModelForm):
             'title': MDLTextFieldInput(),
             'url': MDLTextFieldInput()
         }
+
+
+# Form for DinnerPlan that includes DinnerPlanItems inline
+ItemFormSet = inlineformset_factory(models.DinnerPlan, models.DinnerPlanItem, form=DinnerPlanForm, extra=0,
+                                    can_delete=False,
+                                    widgets={
+                                        'recipe': forms.Select(attrs={'class': 'recipe-select2'}),
+                                        'day': forms.Select(attrs={'class': 'day-select2'}),
+                                        'eaten': forms.CheckboxInput(attrs={'class': 'mdl-checkbox__input'})
+                                    })
+
+# Form for Recipe that makes it possible to add multiple recipes
+RecipeFormSet = modelformset_factory(models.Recipe, form=RecipeForm, extra=0)

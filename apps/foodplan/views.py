@@ -15,8 +15,10 @@ class DinnerPlanObjectQueryMixin(object):
     View mixin which locates dinner plan based on query
     Overrides get_object
     """
+    def __init__(self):
+        self.kwargs = None
 
-    def get_object(self, queryset=None):
+    def get_object(self):
         query = '%s-W%s' % (self.kwargs['year'], self.kwargs['week'])
         week_start = utils.get_start_date_from_year_and_week(query)
         model = models.DinnerPlan.objects.get(start_date=week_start)
@@ -36,13 +38,14 @@ class DinnerPlanIndex(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(DinnerPlanIndex, self).get_context_data(**kwargs)
         most_eaten = None
-        # TODO: Split this...
+
         try:
             most_eaten = models.Recipe.objects.get(id=models.DinnerPlanItem.objects.values('recipe__id').annotate(num_recipes=Count('recipe_id')).latest('num_recipes')['recipe__id'])
             # average_cost = models.DinnerPlan.objects.filter(cost__gt=0).aggregate(Avg('cost', ))['cost__avg']
         except ObjectDoesNotExist as e:
             #  TODO: Debug log here
             pass
+
         context['most_eaten'] = most_eaten
         context['average_cost'] = self.object.cost / 7
         return context
@@ -118,10 +121,13 @@ class DinnerPlanList(LoginRequiredMixin, generic.ListView):
     model = models.DinnerPlan
 
 
-class RecipeCreate(LoginRequiredMixin, generic.CreateView):
-    form_class = forms.RecipeForm
+class RecipeCreate(LoginRequiredMixin, generic.FormView):
+    form_class = forms.RecipeFormSet
     template_name = 'foodplan/create_recipe.html'
     # TODO: Need to add view for single recipes to avoid NoReverseMatch when creating from /food/recipe/add/
+
+    def get_form(self, form_class=None):
+        return forms.RecipeFormSet(queryset=models.Recipe.objects.none())
 
 
 class RecipeUpdate(LoginRequiredMixin, generic.UpdateView):
