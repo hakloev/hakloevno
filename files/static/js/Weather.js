@@ -3,12 +3,14 @@ var Weather = (function () {
     var apiURL = '/static/files/varsel.xml';
 
     var success = function (data) {
-        document.getElementById('forecast').innerHTML = data.text;
+        var temperatureString = data.temperature + "°C";
+        var precipitationString = data.precipitation + " mm";
+        var windString = data.windSpeed + " m/s from " + data.windDirection;
 
-        var detailsString = "";
-        detailsString += (data.temperature + "°C <br>");
-        detailsString += data.windSpeedText + " ";
-        document.getElementById('forecast-details').innerHTML = detailsString;
+        document.getElementById('hn-weather-temperature').innerHTML = temperatureString;
+        document.getElementById('hn-weather-precipitation').innerHTML = precipitationString;
+        document.getElementById('hn-weather-wind').innerHTML = windString;
+        document.getElementById('hn-weather-forecast').innerHTML = data.text;
     };
 
     var getWeatherData = function () {
@@ -25,7 +27,8 @@ var Weather = (function () {
 
             var text = forecastNode.getElementsByTagName('text')[0].getElementsByTagName('body')[0].childNodes[0].data;
             var symbol =  newestForecastNode.getElementsByTagName('symbol')[0].getAttribute('number');
-            var windDirection = newestForecastNode.getElementsByTagName('windDirection')[0].getAttribute('name');
+            var precipitation = newestForecastNode.getElementsByTagName('precipitation')[0].getAttribute('value');
+            var windDirection = newestForecastNode.getElementsByTagName('windDirection')[0].getAttribute('code');
             var windSpeed =  newestForecastNode.getElementsByTagName('windSpeed')[0].getAttribute('mps');
             var windSpeedText =  newestForecastNode.getElementsByTagName('windSpeed')[0].getAttribute('name');
             var temperature = newestForecastNode.getElementsByTagName('temperature')[0].getAttribute('value');
@@ -34,6 +37,7 @@ var Weather = (function () {
             success({
                 'text': text,
                 'symbol': symbol,
+                'precipitation': precipitation,
                 'windDirection': windDirection,
                 'windSpeed': windSpeed,
                 'windSpeedText': windSpeedText,

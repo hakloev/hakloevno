@@ -17,20 +17,18 @@
     </section>
     <section class="hn-border--color-grey hn-padding-50-vertical" id="hn-front-widgets">
         <div class="mdl-grid hn-container--width-85" id="hn-weather">
-            <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div class="mdl-cell mdl-cell--12-col">
                 <div class="mdl-card mdl-shadow--2dp hn-weather__card">
                     <div class="mdl-card__title mdl-card--expand">
-                        <h4 class="" style="margin-bottom: 0; color:white;" id="">
-                            Trondheim
-                        </h4>
+                        <span class="hn-weather__card-element" id="hn-weather-temperature"></span>
+                        <span class="hn-weather__card-element" id="hn-weather-precipitation"></span>
+                        <span class="hn-weather__card-element" id="hn-weather-wind"></span>
+{#                        <span class="hn-weather__card-title">Trondheim</span>#}
                     </div>
-                    <div class="mdl-card__supporting-text" id="forecast-details">
-                        No forecast found...
+                    <div class="mdl-card__supporting-text" id="hn-weather-forecast-details">
+                        <span class="hn-weather__card-element" id="hn-weather-forecast"></span>
                     </div>
                 </div>
-            </div>
-            <div class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-cell--middle">
-                <p class="hn-text--centered" id="forecast"></p>
             </div>
         </div>
     </section>

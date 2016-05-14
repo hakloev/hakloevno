@@ -127,15 +127,33 @@ h3, h4, h5, h6 {
 
 // Weather Cards
 .hn-weather__card {
-    width: 100%;
+  width: 100%;
+}
+
+.hn-weather__card-title {
+  margin-bottom: 0;
+  color:white;
+}
+
+.hn-weather__card-element {
+  display: block;
+}
+
+.hn-weather__card {
+  font-weight: 300;
 }
 
 .hn-weather__card > .mdl-card__title {
-    align-items: flex-end;
-    height: 256px;
-    color: white;
-    background: url("/static/img/trondheim.jpg") center / cover;
-    opacity: 0.92;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 450px;
+  color: white;
+  background: url("/static/img/trondheim.jpg") center / cover;
+  //opacity: 0.92;
+}
+
+#hn-weather-temperature {
+  font-size: 60px;
 }
 
 /* ---------------------------------------------------- */
