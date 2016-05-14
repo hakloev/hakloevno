@@ -141,7 +141,6 @@ h3, h4, h5, h6 {
 /* ---------------------------------------------------- */
 
 // Borders and Alerts
-#hn-alert { }
 .hn-alert {
   height: 30px;
   line-height: 30px;
@@ -254,82 +253,6 @@ h3, h4, h5, h6 {
 
 // TODO: CLEAN CSS AND TEMPLATES FOR FOOD
 // Food
-#hn-food-list {
-  width: 100%;
-  margin-top: -16px;
-  padding-top: 0;
-}
-
-.hn-food-stats {
-  overflow: auto;
-  margin-bottom: 10px;
-  padding: 0 16px 16px 16px;
-  height: 100%;
-  text-align: right;
-}
-
-.hn-food-stats__icon {
-  display: inline-block;
-  margin-left: 10px;
-  >i {
-    font-size: 48px;
-    line-height: 48px;
-  }
-}
-
-.hn-food-stats__detail-text {
-  font-size: 2em;
-  font-weight: 300;
-  color: $orange;
-}
-
-.hn-food-stats__header-text {
-  font-weight: 300;
-}
-
-.hn-food-stats__details {
-  display: inline-block;
-}
-
-.hn-food__meal-form {
-  padding-top: 15px;
-
-  label {
-    font-weight: 300;
-    line-height: 20px;
-    font-size: 20px;
-    vertical-align: middle;
-    margin-right: 10px;
-  }
-  label:not(:first-of-type) {
-      margin-left: 10px;
-  }
-  select {
-    margin-right: 10px;
-  }
-  .hn-food__meal-inline-form {
-    margin-bottom: 20px;
-  }
-  .mdl-checkbox {
-    display: inline-block;
-    width: auto;
-  }
-}
-
-.hn-food__meal-form-error {
-  color: $cherry_pink;
-  font-weight: 500;
-  margin-top: 5px;
-}
-
-.recipe-select2 {
-  width: 350px;
-}
-
-.day-select2 {
-  width: 150px;
-}
-
 .hn-food-card {
   .mdl-card__title {
     color: $orange;
@@ -341,40 +264,33 @@ h3, h4, h5, h6 {
   }
 }
 
-#hn-food-stats-card {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 .hn-food-stats-card {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  div:first-child {
-    display: inline-block;
+  &>.mdl-card__supporting-text {
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    justify-content: space-between;
   }
 }
 
-.hn-food-stats-card__icon {
-  font-size: 48px;
-  line-height: 48px;
-  vertical-align: middle;
-  margin-right: 15px;
-  display: inline-block;
+.hn-food-stats-card__row {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  //justify-content: space-around;
+  margin: auto;
+  width: 135px;
 }
 
 .hn-food-stats-card__text {
-  vertical-align: bottom;
-  display: inline-block;
+  //vertical-align: bottom;
+  //display: inline-block;
 }
 
 .hn-food-stats-card__text-large {
   display: block;
   font-size: 30px;
-  font-weight: 300;
+  //font-weight: 300;
   padding-bottom: 5px;
 }
 
@@ -384,24 +300,18 @@ h3, h4, h5, h6 {
   font-weight: 300;
 }
 
-#hn-food__add-plan {
-  position: fixed;
-  display: block;
-  right: 0;
-  top: 0;
-  margin-right: 40px;
-  margin-top: 220px;
-  z-index: 1000;
+.hn-food__meal-form-error {
+  color: $cherry_pink;
+  font-weight: 500;
+  margin-top: 5px;
 }
 
-#hn-food__edit-plan {
-  position: fixed;
-  display: block;
-  right: 0;
-  top: 0;
-  margin-right: 40px;
-  margin-top: 290px;
-  z-index: 1000;
+.hn-food-recipe-select2 {
+  width: 350px;
+}
+
+.hn-food-day-select2 {
+  width: 150px;
 }
 
 #hn-food-table {

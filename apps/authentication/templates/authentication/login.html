@@ -10,6 +10,10 @@
         <div class="mdl-cell mdl-cell--12-col mdl-cell--middle">
             <h3 class="hn-login__title">enter credentials:</h3>
             <form method="POST" action="{% url 'auth:login' %}">
+                {% csrf_token %}
+                {% if next %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                {% endif %}
                 <div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <input class="mdl-textfield__input" type="text" name="username" id="username" />
@@ -22,8 +26,6 @@
                         <label class="mdl-textfield__label" for="password">Password</label>
                     </div>
                 </div>
-                <input type="hidden" name="next" value="{{ next }}">
-                {% csrf_token %}
                 <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-color--orange">Log in</button>
             </form>
         </div>

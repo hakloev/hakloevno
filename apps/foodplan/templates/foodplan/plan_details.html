@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
+     <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
         <div class="mdl-cell mdl-cell--12-col">
             <h1>dinner plan: week {{ plan.week }}</h1>
         </div>
     </section>
-     <section class="mdl-grid hn-container--width-85 hn-padding-85-vertical" id="hn-food">
+    <section class="mdl-grid hn-container--width-85 hn-padding-30-vertical">
+        <div class="mdl-cell mdl-cell--12-col">
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{% url 'food:plan_create' %}">Create</a>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{% url 'food:plan_update' year=plan.year week=plan.week %}">Edit</a>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{% url 'food:plan_history' %}">History</a>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{% url 'food:recipe_create' %}">Add Recipe</a>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Statistics</a>
+        </div>
+    </section>
+    <section class="mdl-grid hn-container--width-85 hn-padding-85-bottom" id="hn-food">
         {% for meal in plan.items.all %}
         <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone hn-food-card">
             <div class="mdl-card__title">
@@ -20,12 +29,9 @@
             </div>
         </div>
         {% endfor %}
-        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
-            <div class="mdl-card__supporting-text mdl-card--expand" id="hn-food-stats-card">
-                <div class="hn-food-stats-card">
-{#                    <div>#}
-{#                        <i class="material-icons hn-food-stats-card__icon">attach_money</i>#}
-{#                    </div>#}
+        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone hn-food-stats-card">
+            <div class="mdl-card__supporting-text mdl-card--expand">
+                <div class="hn-food-stats-card__row">
                     <div class="hn-food-stats-card__text">
                         <span class="hn-food-stats-card__text-large">
                             {{ plan.cost|floatformat:2 }} kr
@@ -33,10 +39,7 @@
                         <span class="hn-food-stats-card__text-little">cost</span>
                     </div>
                 </div>
-                <div class="hn-food-stats-card">
-{#                    <div>#}
-{#                        <i class="material-icons hn-food-stats-card__icon">trending_up</i>#}
-{#                    </div>#}
+                <div class="hn-food-stats-card__row">
                     <div class="hn-food-stats-card__text">
                         <span class="hn-food-stats-card__text-large">
                             {{ average_cost|floatformat:2 }} kr
@@ -45,9 +48,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="mdl-cell mdl-cell--12-col">
-
         </div>
     </section>
 {% endblock %}

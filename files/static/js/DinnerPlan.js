@@ -19,12 +19,12 @@ var DinnerPlan = (function ($) {
         '<tr id="item-<%= id %>">',
         '<input id="id_items-<%= id %>-plan" name="items-<%= id %>-plan" type="hidden"><input id="id_items-<%= id %>-id" name="items-<%= id %>-id" type="hidden">',
         '<input id="id_items-<%= id %>-plan" name="items-<%= id %>-plan" type="hidden"><input id="id_items-<%= id %>-id" name="items-<%= id %>-id" type="hidden">',
-        '<td><select class="recipe-select2" id="id_items-<%= id %>-recipe" name="items-<%= id %>-recipe">',
+        '<td><select class="hn-food-recipe-select2" id="id_items-<%= id %>-recipe" name="items-<%= id %>-recipe">',
         '<% _.each(recipes, function(r) { %>',
         '<option value="<%= r.pk %>"><%= r.title %></option>',
         '<% }); %>',
         '</select></td>',
-        '<td><select class="day-select2" id="id_items-<%= id %>-day" name="items-<%= id %>-day">',
+        '<td><select class="hn-food-day-select2" id="id_items-<%= id %>-day" name="items-<%= id %>-day">',
         '<% _.each(days, function(d) { %>',
         '<option value="<%= d.id %>"><%= d.title %></option>',
         '<% }); %>',
@@ -36,6 +36,8 @@ var DinnerPlan = (function ($) {
     var addRecipeTemplate = [
         
     ].join('');
+    
+    var addMealButton = '.hn-button-add-meal';
 
     var getRecipes = function () {
         $.ajax({
@@ -67,32 +69,30 @@ var DinnerPlan = (function ($) {
     };
 
     var bindListeners = function () {
-         $('.add-meal').click(function (e) {
+         $(addMealButton).click(function (e) {
             e.preventDefault();
             var count = $('.hn-food-table__body').children().length;
-            var templateMarkup = addMealTemplate;
-            var compiledTemplate = _.template(templateMarkup)({ id : count, recipes: recipes, days: days });
+            var compiledTemplate = _.template(addMealTemplate)({ id : count, recipes: recipes, days: days });
             $('tbody.hn-food-table__body').append(compiledTemplate);
             $('#id_items-TOTAL_FORMS').attr('value', count + 1);
             $('#id_items-' + count + '-recipe').select2();
             $('#id_items-' + count + '-day').select2();
-            console.log(count);
             componentHandler.upgradeDom(); // In order to upgrade mdl-checkbox
             if (count == 6) {
                 $('.add-meal').remove();
             }
         });
 
-        $('.meal-checkbox').change(function (e) {
-            var pk = $(e.target).attr('id').split('-')[2];
-            var checked = ($(e.target).is(':checked') === true) ? 1 :0;
-            changeEaten({'value': checked, 'pk': pk});
-        });
+        // $('.hn-meal-checkbox').change(function (e) {
+        //     var pk = $(e.target).attr('id').split('-')[2];
+        //     var checked = ($(e.target).is(':checked') === true) ? 1 :0;
+        //     changeEaten({'value': checked, 'pk': pk});
+        // });
     };
 
     var startSelect2 = function () {
-        $('.recipe-select2').select2();
-        $('.day-select2').select2();
+        $('.hn-food-recipe-select2').select2();
+        $('.hn-food-day-select2').select2();
     };
 
     return {

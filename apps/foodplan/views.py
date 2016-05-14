@@ -27,26 +27,17 @@ class DinnerPlanObjectQueryMixin(object):
 
 class DinnerPlanIndex(generic.DetailView):
     model = models.DinnerPlan
-    template_name = 'foodplan/index.html'
+    template_name = 'foodplan/plan_details.html'
     context_object_name = 'plan'
 
     def get_object(self, queryset=None):
-        # TODO: Add try/except
+        # TODO: Add try/except with redirect to e.g. create plan
         plan = self.model.objects.current_plan()
         return plan
 
     def get_context_data(self, **kwargs):
         context = super(DinnerPlanIndex, self).get_context_data(**kwargs)
-        most_eaten = None
-
-        try:
-            most_eaten = models.Recipe.objects.get(id=models.DinnerPlanItem.objects.values('recipe__id').annotate(num_recipes=Count('recipe_id')).latest('num_recipes')['recipe__id'])
-            # average_cost = models.DinnerPlan.objects.filter(cost__gt=0).aggregate(Avg('cost', ))['cost__avg']
-        except ObjectDoesNotExist as e:
-            #  TODO: Debug log here
-            pass
-
-        context['most_eaten'] = most_eaten
+        # most_eaten = models.Recipe.objects.get(id=models.DinnerPlanItem.objects.values('recipe__id').annotate(num_recipes=Count('recipe_id')).latest('num_recipes')['recipe__id'])
         context['average_cost'] = self.object.cost / 7
         return context
 
@@ -62,7 +53,7 @@ class DinnerPlanDetails(LoginRequiredMixin, DinnerPlanObjectQueryMixin, generic.
 
 
 class DinnerPlanCreate(LoginRequiredMixin, generic.CreateView):
-    template_name = 'foodplan/create_plan.html'
+    template_name = 'foodplan/plan_create.html'
     form_class = forms.DinnerPlanForm
 
     def get_context_data(self, **kwargs):
@@ -86,7 +77,7 @@ class DinnerPlanCreate(LoginRequiredMixin, generic.CreateView):
 
 
 class DinnerPlanUpdate(LoginRequiredMixin, DinnerPlanObjectQueryMixin, generic.UpdateView):
-    template_name = 'foodplan/create_plan.html'
+    template_name = 'foodplan/plan_create.html'
     form_class = forms.DinnerPlanForm
     context_object_name = 'plan'
 
@@ -123,13 +114,13 @@ class DinnerPlanList(LoginRequiredMixin, generic.ListView):
 
 class RecipeCreate(LoginRequiredMixin, generic.FormView):
     form_class = forms.RecipeFormSet
-    template_name = 'foodplan/create_recipe.html'
+    template_name = 'foodplan/recipe_create.html'
     # TODO: Need to add view for single recipes to avoid NoReverseMatch when creating from /food/recipe/add/
 
 
 class RecipeUpdate(LoginRequiredMixin, generic.UpdateView):
     form_class = forms.RecipeForm
-    template_name = 'foodplan/create_recipe.html'
+    template_name = 'foodplan/recipe_create.html'
     context_object_name = 'recipe'
 
 

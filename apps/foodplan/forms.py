@@ -55,8 +55,8 @@ class RecipeForm(forms.ModelForm):
 ItemFormSet = inlineformset_factory(models.DinnerPlan, models.DinnerPlanItem, form=DinnerPlanForm, extra=0,
                                     can_delete=False,
                                     widgets={
-                                        'recipe': forms.Select(attrs={'class': 'recipe-select2'}),
-                                        'day': forms.Select(attrs={'class': 'day-select2'}),
+                                        'recipe': forms.Select(attrs={'class': 'hn-food-recipe-select2'}),
+                                        'day': forms.Select(attrs={'class': 'hn-food-day-select2'}),
                                         'eaten': forms.CheckboxInput(attrs={'class': 'mdl-checkbox__input'})
                                     })
 
