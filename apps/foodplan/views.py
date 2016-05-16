@@ -26,7 +26,7 @@ class DinnerPlanObjectQueryMixin(object):
         return model
 
 
-class DinnerPlanIndex(generic.DetailView):
+class DinnerPlanIndex(LoginRequiredMixin, generic.DetailView):
     model = models.DinnerPlan
     template_name = 'foodplan/plan_details.html'
     context_object_name = 'plan'
@@ -34,7 +34,7 @@ class DinnerPlanIndex(generic.DetailView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         if not self.object:
-            messages.error(request, 'No plan for this week, create one please!')
+            messages.error(request, 'No plan for this week, please create one!')
             return redirect('food:plan_create')
         return super(DinnerPlanIndex, self).get(request, *args, **kwargs)
 
@@ -74,7 +74,7 @@ class DinnerPlanCreate(LoginRequiredMixin, generic.CreateView):
         else:
             context['formset'] = forms.ItemFormSet()
         return context
-    
+
     def get_initial(self):
         return {
             'start_date': utils.get_today_as_string()
