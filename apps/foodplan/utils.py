@@ -1,4 +1,13 @@
 from datetime import timedelta, datetime
+import time
+
+
+def get_today_as_string():
+    """
+    Returns todays date as a string
+    :return: The date as string
+    """
+    return time.strftime('%Y-%m-%d')
 
 
 def get_week_from_date(date):

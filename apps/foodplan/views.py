@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.shortcuts import redirect
 from django.http.response import JsonResponse, HttpResponse
 from django.views import generic
@@ -30,8 +31,18 @@ class DinnerPlanIndex(generic.DetailView):
     template_name = 'foodplan/plan_details.html'
     context_object_name = 'plan'
 
-    def get_object(self, queryset=None):
-        # TODO: Add try/except with redirect to e.g. create plan
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if not self.object:
+            messages.error(request, 'No plan for this week, create one please!')
+            return redirect('food:plan_create')
+        return super(DinnerPlanIndex, self).get(request, *args, **kwargs)
+
+    def get_object(self):
+        """
+        Returns most recent plan if found, else None
+        :return: Most recent DinnerPlan or None
+        """
         plan = self.model.objects.current_plan()
         return plan
 
@@ -63,6 +74,11 @@ class DinnerPlanCreate(LoginRequiredMixin, generic.CreateView):
         else:
             context['formset'] = forms.ItemFormSet()
         return context
+    
+    def get_initial(self):
+        return {
+            'start_date': utils.get_today_as_string()
+        }
 
     def form_valid(self, form):
         context = self.get_context_data()

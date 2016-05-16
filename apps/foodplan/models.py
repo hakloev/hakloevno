@@ -36,9 +36,19 @@ class Recipe(models.Model):
 
 class DinnerPlanQuerySet(models.QuerySet):
     def current_plan(self):
+        """
+        Adds current_plan to objects.
+        Find the most recent plan, but if it does not exist
+        a NoneType will be returned
+        :return: The newest DinnerPlan object or NoneType
+        """
         today = datetime.today()
         start, end = utils.calculate_week_ends_for_date(today)
-        return self.get(start_date=start)
+        try:
+            plan = self.get(start_date=start)
+            return plan
+        except DinnerPlan.DoesNotExist as e:
+            return None
 
 
 class DinnerPlan(models.Model):
