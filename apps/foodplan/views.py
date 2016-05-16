@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.core.urlresolvers import reverse_lazy
 from django.http.response import JsonResponse, HttpResponse
 from django.views import generic
 from django.db.models import Avg, Count
@@ -128,11 +129,20 @@ class DinnerPlanList(LoginRequiredMixin, generic.ListView):
     model = models.DinnerPlan
 
 
-class RecipeCreate(LoginRequiredMixin, generic.FormView):
-    form_class = forms.RecipeFormSet
+class RecipeCreate(LoginRequiredMixin, generic.CreateView):
+    model = models.Recipe
+    form_class = forms.RecipeForm
     template_name = 'foodplan/recipe_create.html'
+    success_url = reverse_lazy('food:index')
     # TODO: Need to add view for single recipes to avoid NoReverseMatch when creating from /food/recipe/add/
 
+    # def form_valid(self, form):
+    #     super(RecipeCreate, self).form_valid(form)
+
+    #
+    #  def form_invalid(self, form):
+    #     print('invalid')
+    #     print(form)
 
 class RecipeUpdate(LoginRequiredMixin, generic.UpdateView):
     form_class = forms.RecipeForm

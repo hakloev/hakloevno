@@ -59,6 +59,3 @@ ItemFormSet = inlineformset_factory(models.DinnerPlan, models.DinnerPlanItem, fo
                                         'day': forms.Select(attrs={'class': 'hn-food-day-select2'}),
                                         'eaten': forms.CheckboxInput(attrs={'class': 'mdl-checkbox__input'})
                                     })
-
-# Form for Recipe that makes it possible to add multiple recipes
-RecipeFormSet = modelformset_factory(models.Recipe, form=RecipeForm, extra=0)
