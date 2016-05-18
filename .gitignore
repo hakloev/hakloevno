@@ -9,6 +9,7 @@ include/
 lib/
 .Python
 pip-selfcheck.json
+env/*
 node_modules/*
 hakloevno/settings/prod.py
 files/dist/*
