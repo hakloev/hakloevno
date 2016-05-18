@@ -10,7 +10,7 @@ lib/
 .Python
 pip-selfcheck.json
 node_modules/*
+hakloevno/settings/prod.py
 files/dist/*
 files/static/files/varsel.xml
 files/static/components/*
-

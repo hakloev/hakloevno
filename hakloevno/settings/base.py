@@ -11,93 +11,25 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-import inspect
-import sys
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'Removed due too security. Override in dev- or prod.py'
 
-def validate(keyset):
-    """
-    Verify that given the current run environment (LOCAL, STAGING or PRODUCTION), all necessary environment variables
-    have been set, to override the defaults in this settings file.
-    :return: An empty list if no violations were found, otherwise, a populated list of error strings.
-    """
-
-    if PRODUCTION:
-        _env = 'PRODUCTION'
-    elif STAGING:
-        _env = 'STAGING'
-    else:
-        _env = 'LOCAL'
-
-    print('Validating settings for current environment: %s (Debug: %s)' % (_env, DEBUG))
-
-    _settings = inspect.getmodule(validate)
-    _relevant = set(keyset) & set(dir(_settings))
-    _errors = []
-    for var in _relevant:
-        if not getattr(_settings, var):
-            _errors.append('ERROR: "%s" has not been set!' % var)
-
-    return _errors
-
-
-# Declare what environment we are operating in
-PRODUCTION = 'HAKLOEVNO_PRODUCTION' in os.environ
-STAGING = 'HAKLOEVNO_STAGING' in os.environ
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = not PRODUCTION
+DEBUG = False
 
-# Define which attributes must be set if we are in staging
-STAGING_CRITICALS = {
-    'DB_NAME',
-    'DB_USER',
-    'DB_PASSWORD',
-    'DB_HOST',
-    'DB_PORT',
-}
-# Define which attributes must be set if we are in production
-PRODUCTION_CRITICALS = STAGING_CRITICALS.copy()
-PRODUCTION_CRITICALS.update({
-    'SECRET_KEY',
-    'SESSION_COOKIE_SECURE',
-    'CSRF_COOKIE_SECURE',
-    'CSRF_COOKIE_HTTPONLY',
-})
-
-# Fetch values from environment, if provided
-DB_NAME = os.getenv('HAKLOEVNO_DB_NAME', '')
-DB_USER = os.getenv('HAKLOEVNO_DB_USER', '')
-DB_PASSWORD = os.getenv('HAKLOEVNO_DB_PASSWORD', '')
-DB_HOST = os.getenv('HAKLOEVNO_DB_HOST', '')
-DB_PORT = os.getenv('HAKLOEVNO_DB_PORT', '')
-SECRET_KEY = os.getenv('HAKLOEVNO_SECRET_KEY', '')
-
-if PRODUCTION or STAGING:
-    if PRODUCTION:
-        _errors = validate(PRODUCTION_CRITICALS)
-    else:
-        _errors = validate(STAGING_CRITICALS)
-    if _errors:
-        for error in _errors:
-            sys.stderr.write('%s\n' % error)
-        sys.stderr.write(
-            'Please set these environment variables in Environment/uWSGI/Gunicorn.\n'
-        )
-        sys.stderr.flush()
-        sys.exit(1)
+ALLOWED_HOSTS = []
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'hakloev.no']
-
 DEFAULT_FROM_EMAIL = 'epona@hakloev.no'
 
 ADMINS = (
-    ('Håkon Ødegård Løvdal', 'me@hakloev.no'),
+    ('User Name', 'example@mail.com'),
 )
 
 LOGIN_URL = '/auth/login/'
@@ -153,33 +85,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hakloevno.wsgi.application'
 
-# Define our database backend based on which environment we are in
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-if PRODUCTION or STAGING:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': DB_NAME,
-            'USER': DB_USER,
-            'PASSWORD': DB_PASSWORD,
-            'HOST': DB_HOST,
-            'PORT': DB_PORT,
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'dev.db'),
-        }
-    }
-
-if PRODUCTION or STAGING:
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    CSRF_COOKIE_HTTPONLY = True
-    X_FRAME_OPTIONS = 'DENY'
-
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -201,7 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Oslo'
@@ -215,7 +119,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -274,3 +177,14 @@ LOGGING = {
         }
     }
 }
+
+
+# Database
+# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
