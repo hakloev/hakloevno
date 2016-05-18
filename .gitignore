@@ -12,6 +12,7 @@ pip-selfcheck.json
 env/*
 node_modules/*
 hakloevno/settings/prod.py
+hakloevno/settings/staging.py
 files/dist/*
 files/static/files/varsel.xml
 files/static/components/*
