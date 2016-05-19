@@ -3,16 +3,25 @@
 {% block content %}
      <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
         <div class="mdl-cell mdl-cell--12-col">
-            <h1>{{ tag }}</h1>
+            <h1>tag: {{ tag|lower }}</h1>
         </div>
     </section>
     <section class="hn-padding-50-vertical">
-        <div class="mdl-grid hn-container--max-width-85">
+        <div class="mdl-grid hn-container--width-85">
             <div class="mdl-cell mdl-cell--12-col">
-                {% for object in object_list %}
-                    {{ object.title }}
+                {% for entry in object_list %}
+                <div class="hn-blog-post">
+                    <div class="hn-blog-post__title">
+                        <h3 class="hn-blog-post__title-text"><a href="{% url 'blog:blog_post' slug=entry.slug %}">{{ entry.title }}</a></h3>
+                    </div>
+                    <div class="hn-blog-post__meta">
+                        <span class="hn-blog-post__meta--text"><i>Written on {{ entry.created | date:"d. M Y H:i" }}</i></span>
+                    </div>
+                    <div class="hn-blog-post__ingress">
+                        <p>{{ entry.ingress }}</p>
+                    </div>
+                </div>
                 {% endfor %}
-                <br>all blog posts for tag here
             </div>
         </div>
     </section>
