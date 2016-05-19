@@ -129,6 +129,12 @@ class DinnerPlanList(LoginRequiredMixin, generic.ListView):
     model = models.DinnerPlan
 
 
+class RecipesIndex(LoginRequiredMixin, generic.ListView):
+    template_name = 'foodplan/recipe_list.html'
+    paginate_by = 10
+    context_object_name = 'recipes'
+    queryset = models.Recipe.objects.all()
+
 class RecipeCreate(LoginRequiredMixin, generic.CreateView):
     model = models.Recipe
     form_class = forms.RecipeForm

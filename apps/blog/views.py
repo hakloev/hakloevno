@@ -7,6 +7,9 @@ class BlogIndex(generic.ListView):
     template_name = 'blog/index.html'
     paginate_by = 2
 
+# class BlogPostsUnpublished(generic.ListView):
+#     queryset = models.BlogEntry.objects.unpublished()
+
 
 class BlogPostDetail(generic.DetailView):
     model = models.BlogEntry

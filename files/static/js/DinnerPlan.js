@@ -21,7 +21,7 @@ var DinnerPlan = (function ($) {
         '<input id="id_items-<%= id %>-plan" name="items-<%= id %>-plan" type="hidden"><input id="id_items-<%= id %>-id" name="items-<%= id %>-id" type="hidden">',
         '<td><select class="hn-food-recipe-select2" id="id_items-<%= id %>-recipe" name="items-<%= id %>-recipe">',
         '<% _.each(recipes, function(r) { %>',
-        '<option value="<%= r.pk %>"><%= r.title %></option>',
+        '<option value="<%= r.pk %>"><%= r.title %> (<%= r.rating %>/6)</option>',
         '<% }); %>',
         '</select></td>',
         '<td><select class="hn-food-day-select2" id="id_items-<%= id %>-day" name="items-<%= id %>-day">',
@@ -79,7 +79,7 @@ var DinnerPlan = (function ($) {
             $('#id_items-' + count + '-day').select2();
             componentHandler.upgradeDom(); // In order to upgrade mdl-checkbox
             if (count == 6) {
-                $('.add-meal').remove();
+                $(addMealButton).remove();
             }
         });
 

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block content %}
+     <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
+        <div class="mdl-cell mdl-cell--12-col">
+            <h1>recipes {{ page_obj.start_index }} - {{ page_obj.end_index }} of {{ page_obj.paginator.count }}</h1>
+        </div>
+    </section>
+    <section class="mdl-grid hn-padding-50-vertical hn-container--width-85">
+        <div class="mdl-cell mdl-cell--12-col mdl-list">
+            {% for recipe in recipes %}
+                <div class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <span>{{ recipe.title }}</span>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                        <a class="mdl-list__item-secondary-action" href="#">
+                        {% for i in recipe.rating|get_range %}
+                            <i class="material-icons">star</i>
+                        {% endfor %}
+                        </a>
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section>
+        <p>paginator buttons here</p>
+    </section>
+{% endblock %}

@@ -6,13 +6,31 @@ from . import utils
 
 
 class Recipe(models.Model):
+    NOT_RATED = 0
+    AWFUL = 1
+    BAD = 2
+    AVERAGE = 3
+    GOOD = 4
+    GREAT = 5
+    SUPERB = 6
+    RATING = (
+        (NOT_RATED, 'Not rated'),
+        (AWFUL, 'Awful'),
+        (BAD, 'Bad'),
+        (AVERAGE, 'Average'),
+        (GOOD, 'Good'),
+        (GREAT, 'Great'),
+        (SUPERB, 'Superb')
+    )
+
     title = models.CharField(max_length=100, blank=False, null=False)
     url = models.URLField(blank=False)
     slug = models.SlugField(max_length=100, unique=True)
     created = models.DateTimeField(auto_now_add=True)
+    rating = models.PositiveSmallIntegerField(choices=RATING, default=NOT_RATED)
 
     def __str__(self):
-        return self.title
+        return '%s (%d/6)' % (self.title, self.rating)
 
     def get_absolute_url(self):
         return reverse('food:recipe', kwargs={'slug': self.slug})
@@ -20,7 +38,8 @@ class Recipe(models.Model):
     def to_json(self):
         return {
             'pk': self.pk,
-            'title': self.title
+            'title': self.title,
+            'rating': self.rating,
         }
 
     def save(self, *args, **kwargs):

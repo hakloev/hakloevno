@@ -44,7 +44,7 @@ class RecipeForm(forms.ModelForm):
     """
     class Meta:
         model = models.Recipe
-        fields = ['title', 'url']
+        fields = ['title', 'url', 'rating']
         widgets = {
             'title': MDLTextFieldInput(),
             'url': MDLTextFieldInput()
