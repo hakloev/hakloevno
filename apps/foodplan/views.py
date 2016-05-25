@@ -135,6 +135,7 @@ class RecipesIndex(LoginRequiredMixin, generic.ListView):
     context_object_name = 'recipes'
     queryset = models.Recipe.objects.all()
 
+
 class RecipeCreate(LoginRequiredMixin, generic.CreateView):
     model = models.Recipe
     form_class = forms.RecipeForm
