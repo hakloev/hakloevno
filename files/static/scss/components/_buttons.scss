@@ -1,0 +1,12 @@
+.btn {
+  display: inline-block;
+  font-size: 1.5rem;
+  height: 3rem;
+  line-height: 1.7rem;
+  -webkit-appearance: none;
+  border: .1rem solid $hn-border-color;
+  cursor: pointer;
+  text-align: center;
+  padding: .6rem 1.5rem;
+  vertical-align: middle;
+}

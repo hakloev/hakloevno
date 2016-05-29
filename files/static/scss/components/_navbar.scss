@@ -1,0 +1,18 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem;
+  height: $navbar-height;
+  background-color: $hn-border-color;
+
+  .navbar-navigation {
+    display: block;
+
+    .navbar-brand {
+      font-size: 2rem;
+      text-decoration: none;
+      vertical-align: middle;
+    }
+  }
+}
