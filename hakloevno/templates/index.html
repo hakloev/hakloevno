@@ -1,48 +1,54 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}hakloev.no{% endblock %}
 
 {% block content %}
-    <div class="cells">
-        <div class="cell cell-12">
-            <div class="cells">
-                <div class="cell cell-6">
-                    <p class="hn-about-me__text">I'm a computer science student at NTNU, but usually I just wander around acting like a boss and a structured procrastinator. This page is intended to be a playground for learning web technologies as well as documenting stuff I learn and/or want to remember. Feel free to look around!</p>
-                </div>
-                <div class="cell cell-6">
-                    <p>IMAGE/CARD</p>
-                </div>
+    <div class="grid grid-85">
+                    <div class="cell cell-6">
+                        <p class="hn-about-me__text">I'm a computer science student at NTNU, but usually I just wander around acting like a boss and a structured procrastinator. This page is intended to be a playground for learning web technologies as well as documenting stuff I learn and/or want to remember. Feel free to look around!</p>
+                    </div>
+                    <div class="cell cell-6">
+                        <div class="card">
+                            <div class="card__image"></div>
+                            <div class="card__header">
+                                <h4 class="card__title">Håkon Ødegård</h4>
+                                <h6 class="card__subtitle">Developer</h6>
+                            </div>
+                            <div class="card__body">
+                                Testing this card stuff with own css from spectre
+                            </div>
+                        </div>
+                    </div>
+    </div>
+    <div class="grid grid-85">
+            <div class="cell cell-12">
+                <h1>BOARDER</h1>
             </div>
-        </div>
     </div>
-    <div class="cells">
-        <div class="cell cell-12">
-            <h1>BOARDER</h1>
-        </div>
+    <div class="grid grid-85">
+            <div class="cell cell-4">
+                <p>The latest meal is:</p>
+                <p>KYLLING</p>
+            </div>
+            <div class="cell cell-4">
+                <h1>weather</h1>
+                <span class="hn-weather__card-element" id="hn-weather-temperature"></span>
+                <span class="hn-weather__card-element" id="hn-weather-wind"></span>
+                <span class="hn-weather__card-element" id="hn-weather-precipitation"></span>
+                <span class="hn-weather__card-element" id="hn-weather-forecast"></span>
+            </div>
+            <div class="cell cell-4">
+                <h1>bus</h1>
+            </div>
     </div>
-    <div class="cells">
-        <div class="cell cell-4">
-            <p>The latest meal is:</p>
-            <p>KYLLING</p>
-        </div>
-        <div class="cell cell-4">
-            <h1>weather</h1>
-            <span class="hn-weather__card-element" id="hn-weather-temperature"></span>
-            <span class="hn-weather__card-element" id="hn-weather-wind"></span>
-            <span class="hn-weather__card-element" id="hn-weather-precipitation"></span>
-            <span class="hn-weather__card-element" id="hn-weather-forecast"></span>
-        </div>
-        <div class="cell cell-4">
-            <h1>bus</h1>
-        </div>
+    <div class="grid grid-85">
+            <div class="cell cell-12">
+                <h1>latest blog posts</h1>
+            </div>
     </div>
-     <div class="cells">
-        <div class="cell cell-12">
-            <h1>latest blog posts</h1>
-        </div>
-    </div>
-    <div class="cells">
-        <div class="cell cell-12">
+    <div class="grid grid-85">
+            <div class="cell cell-12">
                  {% for entry in blog_entries %}
                     <div class="hn-blog-post">
                         <div class="hn-blog-post__title">
@@ -56,7 +62,7 @@
                         </div>
                     </div>
                  {% endfor %}
-        </div>
+            </div>
     </div>
 {% endblock %}
 

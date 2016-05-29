@@ -1,16 +1,11 @@
 .grid {
   @extend .clearfix;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: $layout-gutter;
-  padding-right: $layout-gutter;
   width: 100%;
-}
-
-.cells {
   display: flex;
-  margin-left: -$layout-gutter;
-  margin-right: -$layout-gutter;
+  margin: 0 auto;
+  align-items: stretch;
+  flex-flow: row wrap;
+
 }
 
 .cell {
@@ -46,6 +41,11 @@
 .cell-3 {  width: 100% * 3 / 12;  }
 .cell-2 {  width: 100% * 2 / 12;  }
 .cell-1 {  width: 100% * 1 / 12;  }
+
+.grid-85 {
+    width: 85%;
+    max-width: 1200px;
+}
 
 // Media for screen sizes:
 @media screen and (min-width: ($screen-xs + 1px)){

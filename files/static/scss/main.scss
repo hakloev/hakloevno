@@ -31,6 +31,18 @@ body {
 //  }
 //}
 
+.responsive-image {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.card > .card__image {
+  background: url("/static/img/hakon.jpg") center / cover;
+  height: 200px;
+}
+
 @import "grid";
 @import "typography";
 @import "components/tables";
+@import "components/cards";
