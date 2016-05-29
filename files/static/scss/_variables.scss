@@ -1,7 +1,7 @@
 $main-font-size: 10px;
 $main-line-height: 1.428571429;
 $body-bg: #fff;
-$body-font-color: #333;
+$body-font-color: #424242;
 $body-font-size: 1.4rem;
 $body-font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
 
@@ -13,15 +13,15 @@ $screen-md: 840px;
 $screen-lg: 960px;
 $screen-xl: 1280px;
 
-$hn-main-color: #fff;
+// fresh cut day among others
+$hn-main-color: #00a8c6;
 $hn-main-secondary-color: lighten($hn-main-color, 35%);
-$hn-link-color: #fff;
-$hn-meta-color: #888;
-$hn-border-color: #fff;
-$hn-alert-color-success: red;
-$hn-alert-color-warning: red;
-$hn-alert-color-info: red;
-
+$hn-link-color: #F90;
+$hn-meta-color: #aee239;
+$hn-border-color: #efefef;
+$hn-alert-color-success: #c7f464;
+$hn-alert-color-warning: #ff6b6b;
+$hn-alert-color-info: #f1efa5;
 
 // Mixins
 

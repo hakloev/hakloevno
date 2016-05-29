@@ -42,6 +42,10 @@
 .cell-2 {  width: 100% * 2 / 12;  }
 .cell-1 {  width: 100% * 1 / 12;  }
 
+.cell-middle {
+  align-self: center;
+}
+
 .grid-85 {
     width: 85%;
     max-width: 1200px;

@@ -26,31 +26,25 @@
         {% endblock %}
 	</head>
 	<body>
-        {% include 'navbar.html' %}
-        <div class="grid">
-            <div class="cells">
-                <div class="cell cell-12">
-                    {% block message_block %}
-                    {% if messages %}
-                        <section id="hn-alerts">
-                        {% for message in messages %}
-                            <div class="hn-alert hn-border--color-{{ message.tags }}">
-                                <a class="hn-alert__close">
-                                    <i class="material-icons">close</i>
-                                </a>
-                                <h4 class="hn-alert__message">{{ message }}</h4>
-                            </div>
-                        {% endfor %}
-                        </section>
-                    {% endif %}
-                {% endblock %}
+{#        {% include 'navbar.html' %}#}
+        {% block message_block %}
+        {% if messages %}
+            <section id="alerts">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <a class="alert-close">
+                        <i class="material-icons">close</i>
+                    </a>
+                    <h4 class="alert-message">{{ message }}</h4>
                 </div>
-            </div>
-        </div>
+            {% endfor %}
+            </section>
+        {% endif %}
+        {% endblock %}
         <div class="main-content">
             {% block content %}
             {% endblock %}
-            {% include 'footer.html' %}
+{#            {% include 'footer.html' %}#}
         </div>
         <!-- JavaScript -->
 		{% block footer_js %}

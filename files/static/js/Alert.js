@@ -1,6 +1,6 @@
 var Alert = (function ($) {
     
-    var closeTag = '.hn-alert__close';
+    var closeTag = '.alert-close';
 
     return {
         // This function is called on a window load event

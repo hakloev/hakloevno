@@ -56,6 +56,6 @@ var Weather = (function () {
 })();
 
 window.addEventListener('load', function () {
-    var weather = document.getElementById('hn-weather');
+    var weather = document.getElementById('weather-card');
     if (weather) { Weather.get(); }
 });

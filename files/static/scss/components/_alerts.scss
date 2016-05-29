@@ -1,0 +1,30 @@
+.alert {
+  height: 100%;
+  line-height: 30px;
+  padding: 20px 10px;
+
+  .alert-close {
+    float: right;
+    cursor: pointer;
+    color: white;
+  }
+
+  .alert-message {
+    text-align: center;
+    margin: 0;
+  }
+}
+
+ .alert-success {
+  background-color: $hn-alert-color-success;
+  .alert-message {
+    color: $body-font-color;
+  }
+}
+
+.alert-error {
+  background-color: $hn-alert-color-warning;
+  .alert-message {
+    color: $body-font-color;
+  }
+}
