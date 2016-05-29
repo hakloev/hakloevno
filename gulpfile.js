@@ -40,7 +40,7 @@ var paths = {
 
 var swallowError = function (error) {
   console.log('Swallowing Error');
-  //console.log(error.toString());
+  console.log(error.toString());
   this.emit('end');
 };
 

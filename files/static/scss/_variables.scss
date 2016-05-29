@@ -1,0 +1,35 @@
+$main-font-size: 10px;
+$main-line-height: 1.428571429;
+$body-bg: #fff;
+$body-font-color: #333;
+$body-font-size: 1.4rem;
+$body-font-family: "Helvetica Neue", sans-serif;
+
+$layout-gutter: 1rem;
+
+$screen-xs: 480px;
+$screen-sm: 600px;
+$screen-md: 840px;
+$screen-lg: 960px;
+$screen-xl: 1280px;
+
+$hn-main-color: #fff;
+$hn-main-secondary-color: lighten($hn-main-color, 35%);
+$hn-link-color: #fff;
+$hn-meta-color: #888;
+$hn-border-color: #fff;
+$hn-alert-color-success: red;
+$hn-alert-color-warning: red;
+$hn-alert-color-info: red;
+
+
+// Mixins
+
+// Classes for inheritance
+.clearfix {
+  &::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}
