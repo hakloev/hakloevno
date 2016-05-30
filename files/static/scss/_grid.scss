@@ -1,46 +1,29 @@
+// Mixins
+@mixin calculate-width($size, $columns, $gutter) {
+  width: calc(#{(($size / $columns ) *100)+"%"} - #{$gutter});
+}
+
 .grid {
-  @extend .clearfix;
-  width: 100%;
   display: flex;
-  margin: 0 auto;
   align-items: stretch;
   flex-flow: row wrap;
+  width: 100%;
+  margin: 0 auto;
+  @extend .clearfix;
 
 }
 
 .cell {
   flex: 1;
+  box-sizing: border-box;
   padding: $layout-gutter;
 
-  &.cell-12,
-  &.cell-11,
-  &.cell-10,
-  &.cell-9,
-  &.cell-8,
-  &.cell-7,
-  &.cell-6,
-  &.cell-5,
-  &.cell-4,
-  &.cell-3,
-  &.cell-2,
-  &.cell-1 {
-    flex: none;
+  @for $i from 1 through 12 {
+    &.cell-#{$i} {
+      flex: none;
+    }
   }
-
 }
-
-.cell-12 {  width: 100%;  }
-.cell-11 {  width: 100% * 11 / 12;  }
-.cell-10 {  width: 100% * 10 / 12;  }
-.cell-9 {  width: 100% * 9 / 12;  }
-.cell-8 {  width: 100% * 8 / 12;  }
-.cell-7 {  width: 100% * 7 / 12;  }
-.cell-6 {  width: 100% * 6 / 12;  }
-.cell-5 {  width: 100% * 5 / 12;  }
-.cell-4 {  width: 100% * 4 / 12;  }
-.cell-3 {  width: 100% * 3 / 12;  }
-.cell-2 {  width: 100% * 2 / 12;  }
-.cell-1 {  width: 100% * 1 / 12;  }
 
 .cell-middle {
   align-self: center;
@@ -51,18 +34,46 @@
     max-width: 1200px;
 }
 
-// Media for screen sizes:
-@media screen and (min-width: ($screen-xs + 1px)){
 
+// Grid for phone
+@media screen and (max-width: $grid-breakpoint-md - 1){
+  // Calculate the width for size specific columns
+  @for $i from 1 through 12 {
+    .cell-sm-#{$i} {
+      @include calculate-width($i, 12, $layout-gutter)
+    }
+  }
+
+  // Calculate full size for all other specifications
+  @for $i from 1 through 12 {
+    .cell-#{$i} {
+      @include calculate-width(12, 12, $layout-gutter)
+    }
+  }
 }
 
-@media screen and (min-width: ($screen-sm + 1px)){
+// Grid for tablet
+@media screen and (min-width: $grid-breakpoint-md) and (max-width: $grid-breakpoint-lg - 1){
+  @for $i from 1 through 12 {
+    .cell-md-#{$i} {
+      @include calculate-width($i, 12, $layout-gutter)
+    }
+  }
 
+  // Calculate full size for all other specifications
+  @for $i from 1 through 12 {
+    .cell-#{$i} {
+      @include calculate-width(12, 12, $layout-gutter)
+    }
+  }
 }
 
-@media screen and (min-width: ($screen-md + 1px)){
-
+// Grid for desktop
+@media screen and (min-width: $grid-breakpoint-lg) {
+  @for $i from 1 through 12 {
+    .cell-#{$i} {
+      @include calculate-width($i, 12, $layout-gutter)
+    }
+  }
 }
-
-
 
