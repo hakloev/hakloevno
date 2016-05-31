@@ -7,25 +7,25 @@
 {% endblock %}
 
 {% block content %}
-    <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
-        <div class="mdl-cell mdl-cell--12-col">
+    <section class="grid border">
+        <div class="cell cell-12">
             <h1>{{ object }}</h1>
         </div>
     </section>
-    <section class="mdl-grid hn-padding-50-vertical hn-container--width-85">
-        <div class="mdl-cell mdl-cell--12-col">
+    <section class="grid grid-85">
+        <div class="cell cell-12">
             {% for tag in object.tags.all %}
-                <a href="{% url 'blog:tag_details' tag=tag.slug %}" class="hn-tag mdl-button--raised hn-tag--color-orange">{{ tag }}</a>
+                <a href="{% url 'blog:tag_details' tag=tag.slug %}" class="">{{ tag }}</a>
             {% endfor %}
         </div>
-        <div class="mdl-cell mdl-cell--12-col hn-blog-post">
-            <div class="hn-blog-post__meta">
-                <span class="hn-blog-post__meta--text"><i>Written on {{ object.created | date:"d. M Y H:i" }}</i></span>
+        <div class="cell cell-12">
+            <div class="">
+                <span class=""><i>Written on {{ object.created | date:"d. M Y H:i" }}</i></span>
             </div>
-            <div class="hn-blog-post__ingress">
+            <div class="">
                 <p>{{ object.ingress }}</p>
             </div>
-            <div class="hn-blog-post__content">
+            <div class="">
                 {{ object.body | markdown }}
             </div>
         </div>

@@ -7,32 +7,26 @@
 {% endblock %}
 
 {% block content %}
-    <section class="mdl-grid hn-border--color-grey hn-text--centered" id="hn-border">
-        <div class="mdl-cell mdl-cell--12-col">
-            <h1>latest blog posts</h1>
+    <section class="grid border">
+        <div class="cell cell-12">
+            <h1>posts</h1>
         </div>
     </section>
-    <section class="hn-padding-50-vertical" id="hn-blog-posts">
-        <div class="mdl-grid hn-container--width-85">
-            <div class="mdl-cell mdl-cell--12-col">
-                <div class="mdl-grid mdl-grid--no-spacing">
-                    <div class="mdl-cell mdl-cell--12-col">
-                        {% for entry in object_list %}
-                        <div class="hn-blog-post">
-                            <div class="hn-blog-post__title">
-                                <h3 class="hn-blog-post__title-text"><a href="{% url 'blog:blog_post' slug=entry.slug %}">{{ entry.title }}</a></h3>
-                            </div>
-                            <div class="hn-blog-post__meta">
-                                <span class="hn-blog-post__meta--text"><i>Written on {{ entry.created | date:"d. M Y H:i" }}</i></span>
-                            </div>
-                            <div class="hn-blog-post__ingress">
-                                <p>{{ entry.ingress }}</p>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
+    <section class="grid grid-85">
+        <div class="cell cell-12">
+            {% for entry in object_list %}
+            <div class="hn-blog-post">
+                <div class="hn-blog-post__title">
+                    <h3 class="hn-blog-post__title-text"><a href="{% url 'blog:blog_post' slug=entry.slug %}">{{ entry.title }}</a></h3>
+                </div>
+                <div class="hn-blog-post__meta">
+                    <span class="hn-blog-post__meta--text"><i>Written on {{ entry.created | date:"d. M Y H:i" }}</i></span>
+                </div>
+                <div class="hn-blog-post__ingress">
+                    <p>{{ entry.ingress }}</p>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </section>
 {% endblock %}
