@@ -7,7 +7,7 @@
 
 {% block content %}
     <section class="grid grid-85 pad-vertical-50">
-        <div class="cell cell-sm-12 cell-md-6 cell-8 blog-posts-front">
+        <div class="cell cell-sm-12 cell-md-6 cell-8 blog-post-list">
 {#            <p id="about-me-text">I'm a computer science student at NTNU, but usually I just wander around acting like a boss and a structured procrastinator. This page is intended to be a playground for learning web technologies as well as documenting stuff I learn and/or want to remember. Feel free to look around!</p>#}
             {% for entry in blog_entries %}
                 <div class="blog-post">
@@ -18,7 +18,7 @@
                         <span class="blog-post-meta-text">Posted by Håkon on {{ entry.created | date:"F dS, Y" }}</span>
                     </div>
                     <div class="blog-post-ingress">
-                        <p>{{ entry.ingress }}</p>
+                        <p>{{ entry.ingress|truncatewords:75 }}</p>
                     </div>
                 </div>
              {% endfor %}
@@ -49,6 +49,17 @@
                             </a>
                         </li>
                     </ul>
+                </div>
+            </div>
+            <div class="card" id="weather-card">
+                <div class="card-body">
+                    <span class="weather-element" id="hn-weather-temperature"></span>
+                    <span class="weather-element" id="hn-weather-wind"></span>
+                    <span class="weather-element" id="hn-weather-precipitation"></span>
+                </div>
+                <div class="card-footer">
+                    <h4 class="card-title">Trondheim</h4>
+                    <h6 class="card-subtitle" id="hn-weather-forecast"></h6>
                 </div>
             </div>
         </div>

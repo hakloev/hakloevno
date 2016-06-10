@@ -56,9 +56,10 @@ a {
 }
 
 #weather-card {
+  margin-top: 5rem;
   > .card-body {
     background: url("/static/img/trondheim.jpg") center / cover;
-    height: 400px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
