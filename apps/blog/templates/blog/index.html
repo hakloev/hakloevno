@@ -12,21 +12,21 @@
             <h1>posts</h1>
         </div>
     </section>
-    <section class="grid grid-85">
-        <div class="cell cell-12">
+    <section class="grid grid-85 pad-vertical-50">
+        <div class="cell cell-12 blog-post-list">
             {% for entry in object_list %}
-            <div class="hn-blog-post">
-                <div class="hn-blog-post__title">
-                    <h3 class="hn-blog-post__title-text"><a href="{% url 'blog:blog_post' slug=entry.slug %}">{{ entry.title }}</a></h3>
+                <div class="blog-post">
+                    <div class="blog-post-title">
+                        <h3 class="blog-post-title-text"><a href="{% url 'blog:blog_post' slug=entry.slug %}">{{ entry.title }}</a></h3>
+                    </div>
+                    <div class="blog-post-meta">
+                        <span class="blog-post-meta-text">Posted by Håkon on {{ entry.created | date:"F dS, Y" }}</span>
+                    </div>
+                    <div class="blog-post-ingress">
+                        <p>{{ entry.ingress }}</p>
+                    </div>
                 </div>
-                <div class="hn-blog-post__meta">
-                    <span class="hn-blog-post__meta--text"><i>Written on {{ entry.created | date:"d. M Y H:i" }}</i></span>
-                </div>
-                <div class="hn-blog-post__ingress">
-                    <p>{{ entry.ingress }}</p>
-                </div>
-            </div>
-            {% endfor %}
+             {% endfor %}
         </div>
     </section>
 {% endblock %}

@@ -28,7 +28,7 @@ a {
 
   &:hover,
   &:focus {
-    color: darken($hn-link-color, 25%);
+    color: darken($hn-link-color, 15%);
   }
 }
 
@@ -39,7 +39,10 @@ a {
 }
 
 #main-content {
-  margin-top: 5rem;
+  position: relative;
+  margin-bottom: 5rem;
+  padding-bottom: 80px;
+  transition: transform 0.5s;
 }
 
 #about-me-text {

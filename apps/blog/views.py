@@ -5,7 +5,7 @@ from . import models
 class BlogIndex(generic.ListView):
     queryset = models.BlogEntry.objects.published()
     template_name = 'blog/index.html'
-    paginate_by = 2
+    paginate_by = 5
 
 # class BlogPostsUnpublished(generic.ListView):
 #     queryset = models.BlogEntry.objects.unpublished()
