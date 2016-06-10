@@ -1,0 +1,17 @@
+.list {
+
+  list-style: none;
+  padding-left: 0;
+
+  &.list-inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .fa-custom-4 {
+    font-size: 4rem;
+  }
+
+}

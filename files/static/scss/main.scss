@@ -38,6 +38,10 @@ a {
   max-width: 100%;
 }
 
+#main-content {
+  margin-top: 5rem;
+}
+
 #about-me-text {
   font-size: 1.8rem;
 }
@@ -89,3 +93,7 @@ a {
 @import "components/tables";
 @import "components/cards";
 @import "components/alerts";
+@import "components/lists";
+
+/* Apps */
+@import "apps/blog";

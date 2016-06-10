@@ -1,0 +1,32 @@
+.blog-post {
+
+  .blog-post-title {
+    h3.blog-post-title-text {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .blog-post-meta {
+    margin: 1.5rem 0;
+  }
+
+  .blog-post-ingress
+    > p {
+    line-height: 2;
+  }
+
+}
+
+/* Front page blog */
+.blog-posts-front {
+
+  .blog-post {
+    margin-bottom: 4rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+}

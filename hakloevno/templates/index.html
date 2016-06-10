@@ -7,8 +7,21 @@
 
 {% block content %}
     <section class="grid grid-85 pad-vertical-50">
-        <div class="cell cell-sm-12 cell-md-6 cell-8 cell-middle">
-            <p id="about-me-text">I'm a computer science student at NTNU, but usually I just wander around acting like a boss and a structured procrastinator. This page is intended to be a playground for learning web technologies as well as documenting stuff I learn and/or want to remember. Feel free to look around!</p>
+        <div class="cell cell-sm-12 cell-md-6 cell-8 blog-posts-front">
+{#            <p id="about-me-text">I'm a computer science student at NTNU, but usually I just wander around acting like a boss and a structured procrastinator. This page is intended to be a playground for learning web technologies as well as documenting stuff I learn and/or want to remember. Feel free to look around!</p>#}
+            {% for entry in blog_entries %}
+                <div class="blog-post">
+                    <div class="blog-post-title">
+                        <h3 class="blog-post-title-text"><a href="{% url 'blog:blog_post' slug=entry.slug %}">{{ entry.title }}</a></h3>
+                    </div>
+                    <div class="blog-post-meta">
+                        <span class="blog-post-meta-text">Posted by Håkon on {{ entry.created | date:"F dS, Y" }}</span>
+                    </div>
+                    <div class="blog-post-ingress">
+                        <p>{{ entry.ingress }}</p>
+                    </div>
+                </div>
+             {% endfor %}
         </div>
         <div class="cell cell-sm-12 cell-md-6 cell-4">
             <div class="card" id="about-me-card">
@@ -17,60 +30,55 @@
                     <h4 class="card-title">Håkon Ødegård Løvdal</h4>
                     <h6 class="card-subtitle">Developer</h6>
                 </div>
-{#                <div class="card-body">#}
-{#                    I'm the boss!#}
-{#                </div>#}
+                <div class="card-separator"></div>
+                <div class="card-body">
+                    <ul class="list list-inline">
+                        <li>
+                            <a href="https://github.com/hakloev">
+                                <i class="fa fa-github fa-custom-4"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/hakloevdal">
+                                <i class="fa fa-twitter fa-custom-4"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://linkedin.com">
+                                <i class="fa fa-linkedin fa-custom-4"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
-    <section class="grid border">
-        <div class="cell cell-12">
-            <h1>weather</h1>
-        </div>
-    </section>
-    <section class="grid grid-85 pad-vertical-50">
+{#    <section class="grid border">#}
+{#        <div class="cell cell-12">#}
+{#            <h1>weather</h1>#}
+{#        </div>#}
+{#    </section>#}
+{#    <section class="grid grid-85 pad-vertical-50">#}
 {#            <div class="cell cell-4">#}
 {#                <p>The latest meal is:</p>#}
 {#                <p>KYLLING</p>#}
 {#            </div>#}
-            <div class="cell cell-12">
-                <div class="card" id="weather-card">
-                    <div class="card-body">
-                        <span class="weather-element" id="hn-weather-temperature"></span>
-                        <span class="weather-element" id="hn-weather-wind"></span>
-                        <span class="weather-element" id="hn-weather-precipitation"></span>
-                    </div>
-                    <div class="card-footer">
-                        <h4 class="card-title">Trondheim</h4>
-                        <h6 class="card-subtitle" id="hn-weather-forecast"></h6>
-                    </div>
-                </div>
-            </div>
+{#            <div class="cell cell-12">#}
+{#                <div class="card" id="weather-card">#}
+{#                    <div class="card-body">#}
+{#                        <span class="weather-element" id="hn-weather-temperature"></span>#}
+{#                        <span class="weather-element" id="hn-weather-wind"></span>#}
+{#                        <span class="weather-element" id="hn-weather-precipitation"></span>#}
+{#                    </div>#}
+{#                    <div class="card-footer">#}
+{#                        <h4 class="card-title">Trondheim</h4>#}
+{#                        <h6 class="card-subtitle" id="hn-weather-forecast"></h6>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
 {#            <div class="cell cell-4">#}
 {#                <h1>bus</h1>#}
 {#            </div>#}
-    </section>
-    <section class="grid border">
-            <div class="cell cell-12">
-                <h1>latest blog posts</h1>
-            </div>
-    </section>
-    <section class="grid grid-85 pad-vertical-50">
-        <div class="cell cell-12">
-             {% for entry in blog_entries %}
-                <div class="hn-blog-post">
-                    <div class="hn-blog-post__title">
-                        <h3 class="hn-blog-post__title-text"><a href="{% url 'blog:blog_post' slug=entry.slug %}">{{ entry.title }}</a></h3>
-                    </div>
-                    <div class="hn-blog-post__meta">
-                        <span class="hn-blog-post__meta--text"><i>Written on {{ entry.created | date:"d. M Y H:i" }}</i></span>
-                    </div>
-                    <div class="hn-blog-post__ingress">
-                        <p>{{ entry.ingress }}</p>
-                    </div>
-                </div>
-             {% endfor %}
-        </div>
-    </section>
+{#    </section>#}
 {% endblock %}
 

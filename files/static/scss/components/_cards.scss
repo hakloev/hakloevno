@@ -10,6 +10,7 @@
 
   .card-header,
   .card-body,
+  .card-separator,
   .card-footer {
     padding: 1.5rem 1.5rem 0 1.5rem;
 
@@ -31,5 +32,11 @@
     font-size: 1em;
     margin-bottom: 0;
     margin-top: 0;
+  }
+  .card-body {
+    font-weight: 200;
+  }
+  .card-separator {
+    border-bottom: 1px solid $hn-border-color;
   }
 }
