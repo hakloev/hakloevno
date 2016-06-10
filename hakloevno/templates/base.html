@@ -26,7 +26,6 @@
         {% endblock %}
 	</head>
 	<body>
-        {% include 'navbar.html' %}
         {% block message_block %}
         {% if messages %}
             <section id="alerts">
@@ -45,7 +44,17 @@
             {% block content %}
             {% endblock %}
 {#            {% include 'footer.html' %}#}
+            <div id="hn-header">
+                <div id="hn-header-brand">
+                    <a href="#">hakloev.no</a>
+                </div>
+                <a id="hn-header-trigger" href="#main-navigation">
+                   Menu<span></span>
+                </a>
+            </div>
+            <div class="navigation-blurred-bg"></div>
         </div>
+        {% include 'navbar.html' %}
         <!-- JavaScript -->
 		{% block footer_js %}
             <script src="{% static 'vendor/js/select2.full.min.js' %}"></script>

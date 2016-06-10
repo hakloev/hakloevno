@@ -1,15 +1,39 @@
-<header class="navbar">
-    <section class="navbar-navigation">
-        <a href="/" class="navbar-brand">hakloev.no</a>
-    </section>
-    <section class="navbar-navigation">
-        <a class="btn {% if '/blog/' in request.path %}navigation-link-current{% endif %}" href="{% url 'blog:index' %}">blog</a>
-        <a class="btn {% if '/food/' in request.path %}navigation-link-current{% endif %}" href="{% url 'food:index' %}">food</a>
+<div class="navigation-shadow-layer"></div>
+<!-- Navigation -->
+<nav id="main-navigation">
+    <ul>
+        <li>
+            <a class="navigation-ling" href="/"><span>Home</span></a>
+        </li>
+        <li>
+            <a class="navigation-link" href="{% url 'blog:index' %}"><span>blog</span></a>
+        </li>
+        <li>
+            <a class="navigation-link" href="{% url 'food:index' %}"><span>food</span></a>
+        </li>
         {% if user.is_authenticated %}
-            <a class="btn" href="/admin/">admin</a>
-            <a class="btn" href="{% url 'auth:logout' %}"><i class="fa fa-unlock"></i></a>
+            <li>
+                <a class="navigation-link" href="/admin/"><span>admin</span></a>
+            </li>
+            <li>
+                <a class="navigation-link" href="{% url 'auth:logout' %}"><span>logout</span></a>
+            </li>
         {% else %}
-            <a class="btn" href="{% url 'auth:login' %}"><i class="fa fa-lock"></i></a>
+            <li>
+                <a class="navigation-link" href="{% url 'auth:login' %}"><span>login</span></a>
+            </li>
         {% endif %}
-    </section>
-</header>
+
+    </ul>
+    <a href="#" id="hn-header-close"><span></span></a>
+{#    <section class="navbar-navigation">#}
+{#        <a class="btn {% if '/blog/' in request.path %}navigation-link-current{% endif %}" href="{% url 'blog:index' %}">blog</a>#}
+{#        <a class="btn {% if '/food/' in request.path %}navigation-link-current{% endif %}" href="{% url 'food:index' %}">food</a>#}
+{#        {% if user.is_authenticated %}#}
+{#            <a class="btn" href="/admin/">admin</a>#}
+{#            <a class="btn" href="{% url 'auth:logout' %}"><i class="fa fa-unlock"></i></a>#}
+{#        {% else %}#}
+{#            <a class="btn" href="{% url 'auth:login' %}"><i class="fa fa-lock"></i></a>#}
+{#        {% endif %}#}
+{#    </section>#}
+</nav>
